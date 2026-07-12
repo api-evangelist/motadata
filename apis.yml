@@ -24,6 +24,8 @@ apis:
       - type: Documentation
         url: https://docs.motadata.com
 common:
+  - type: DomainSecurity
+    url: security/motadata-domain-security.yml
   - type: GitHubOrganization
     url: https://github.com/motadata
   - type: LinkedIn
@@ -32,6 +34,8 @@ common:
     url: https://www.motadata.com
   - type: Documentation
     url: https://docs.motadata.com
+  - url: https://www.motadata.com/blog
+    type: Blog
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
