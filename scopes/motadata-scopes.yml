@@ -1,0 +1,36 @@
+specification: API Commons OAuth Scopes
+specificationVersion: '0.1'
+provider: Motadata
+providerId: motadata
+generated: '2026-08-29'
+method: searched
+source: https://docs.motadata.com/serviceops-docs/integration-docs/managing-request-using-api
+docs: https://docs.motadata.com/serviceops-docs/integration-docs/managing-request-using-api
+description: >-
+  Motadata ServiceOps issues OAuth 2.0 access tokens through a password grant at
+  /api/oauth/token. The token response carries a `scope` field, but Motadata documents exactly
+  one value and publishes no scopes/permissions reference page. Authorization is enforced by the
+  ServiceOps user the token is minted for — the role and permission set of that account — rather
+  than by scope. There is no consent screen and no scope selection step.
+api: motadata:serviceops
+flows:
+  - flow: password
+    tokenUrl: https://{serviceops-host}/api/oauth/token
+    client_auth: 'Basic base64(ClientID:ClientSecret)'
+scopes:
+  - name: other-api-scope
+    description: >-
+      The only scope value Motadata documents in the token response. It is not described as
+      partitioning access to any subset of the API; it appears to be a constant.
+    source: https://docs.motadata.com/serviceops-docs/integration-docs/managing-request-using-api
+scope_count: 1
+notes:
+  - >-
+    ObserveOps (the other Motadata product) has no OAuth surface at all — it authenticates with a
+    Personal Access Token, a static cookie, or a username/password session, and authorizes by
+    user permissions. See authentication/motadata-authentication.yml.
+  - >-
+    No scopes were invented to fill this file. One documented scope is the honest count.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

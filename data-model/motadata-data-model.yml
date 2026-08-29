@@ -1,0 +1,1090 @@
+specification: API Commons Data Model
+specificationVersion: '0.1'
+provider: Motadata
+providerId: motadata
+generated: '2026-08-29'
+method: derived
+source: npm observeops@2.3.1 — src/data/resources.json, embedded verbatim in the published dist/index.js bundle. Motadata
+  ships this catalog inside its own CLI so an agent can address resource types that have no typed command.
+description: 'The ObserveOps (AIOps) REST resource catalog: 96 configuration resource types, each with its /api/v1 path, its
+  CRUD verb set, and any additional non-CRUD routes. Derived from the resource catalog Motadata publishes inside its official
+  CLI, not from an OpenAPI — Motadata publishes no machine-readable API contract.'
+api: motadata:observeops
+base_path: /api/v1
+mounts:
+- mount: /settings
+  resource_count: 89
+- mount: /system
+  resource_count: 1
+- mount: /visualization
+  resource_count: 6
+conventions:
+  id_field: id
+  field_naming: dotted literal keys, e.g. agent.os.name, agent.status.flap.counter — the dot is part of the key, not a path
+    into a nested object
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+  search: search is a POST with a filter body rather than a GET with query params
+entities:
+- name: agents
+  path: /api/v1/settings/agents
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - delete
+  - search
+  - delete-all
+  extra_routes: 21
+- name: application-mappers
+  path: /api/v1/settings/application-mappers
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+- name: backup-profiles
+  path: /api/v1/settings/backup-profiles
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+- name: business-hours
+  path: /api/v1/settings/business-hours
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+  extra_routes: 1
+- name: compliance-benchmarks
+  path: /api/v1/settings/compliance-benchmarks
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+  extra_routes: 1
+- name: compliance-policies
+  path: /api/v1/settings/compliance-policies
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+  extra_routes: 3
+- name: compliance-rules
+  path: /api/v1/settings/compliance-rules
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+  extra_routes: 1
+- name: config-approval-requests
+  path: /api/v1/settings/config-approval-requests
+  mount: /settings
+  verbs:
+  - list
+  - get
+  extra_routes: 1
+- name: config-firmware-profiles
+  path: /api/v1/settings/config-firmware-profiles
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+  extra_routes: 1
+- name: config-templates
+  path: /api/v1/settings/config-templates
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+  extra_routes: 1
+- name: configurations
+  path: /api/v1/settings/configurations
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - update
+  extra_routes: 7
+- name: correction-profiles
+  path: /api/v1/settings/correction-profiles
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+- name: credential-profiles
+  path: /api/v1/settings/credential-profiles
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+  extra_routes: 1
+- name: custom-metrics
+  path: /api/v1/settings/custom-metrics
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+  extra_routes: 1
+- name: custom-monitoring-fields
+  path: /api/v1/settings/custom-monitoring-fields
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+- name: dashboards
+  path: /api/v1/visualization/dashboards
+  mount: /visualization
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+- name: data-retention-policy
+  path: /api/v1/settings/data-retention-policy
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+- name: dependency-mappers
+  path: /api/v1/settings/dependency-mappers
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+  extra_routes: 1
+- name: discoveries
+  path: /api/v1/settings/discoveries
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+  extra_routes: 6
+- name: dns-server-profiles
+  path: /api/v1/settings/dns-server-profiles
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+  extra_routes: 1
+- name: event-policies
+  path: /api/v1/settings/event-policies
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+  extra_routes: 2
+- name: event-sources
+  path: /api/v1/settings/event-sources
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - search
+  extra_routes: 5
+- name: explorers
+  path: /api/v1/visualization/explorers
+  mount: /visualization
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+- name: flow-as-mappers
+  path: /api/v1/settings/flow-as-mappers
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+- name: flow-domain-mappers
+  path: /api/v1/settings/flow-domain-mappers
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+- name: flow-geolocation-mappers
+  path: /api/v1/settings/flow-geolocation-mappers
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+- name: flow-ip-groups
+  path: /api/v1/settings/flow-ip-groups
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+- name: flow-ip-mappers
+  path: /api/v1/settings/flow-ip-mappers
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+  extra_routes: 1
+- name: flow-sampling-rates
+  path: /api/v1/settings/flow-sampling-rates
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - update
+- name: flow-settings
+  path: /api/v1/settings/flow-settings
+  mount: /settings
+  verbs:
+  - get
+  - update
+- name: groups
+  path: /api/v1/settings/groups
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+  extra_routes: 1
+- name: integration-profiles
+  path: /api/v1/settings/integration-profiles
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+  extra_routes: 1
+- name: integrations
+  path: /api/v1/settings/integrations
+  mount: /settings
+  verbs:
+  - list
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+  extra_routes: 1
+- name: ldap-servers
+  path: /api/v1/settings/ldap-servers
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+  extra_routes: 1
+- name: license
+  path: /api/v1/settings/license
+  mount: /settings
+  verbs:
+  - list
+  - update
+- name: log-collector-plugins
+  path: /api/v1/settings/log-collector-plugins
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+  extra_routes: 1
+- name: log-exclude-profiles
+  path: /api/v1/settings/log-exclude-profiles
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+  extra_routes: 1
+- name: log-forwarders
+  path: /api/v1/settings/log-forwarders
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+  extra_routes: 1
+- name: log-index-profiles
+  path: /api/v1/settings/log-index-profiles
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+  extra_routes: 1
+- name: log-ingestion-profile
+  path: /api/v1/settings/log-ingestion-profile
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+  extra_routes: 4
+- name: log-parser-plugins
+  path: /api/v1/settings/log-parser-plugins
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+- name: log-parsers
+  path: /api/v1/settings/log-parsers
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+  extra_routes: 2
+- name: log-pipeline-parsers
+  path: /api/v1/settings/log-pipeline-parsers
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+- name: log-pipeline-processors
+  path: /api/v1/settings/log-pipeline-processors
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+- name: log-pipelines
+  path: /api/v1/settings/log-pipelines
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+  extra_routes: 3
+- name: log-processors
+  path: /api/v1/settings/log-processors
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+  extra_routes: 1
+- name: log-type-rules
+  path: /api/v1/settings/log-type-rules
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - search
+- name: log-types
+  path: /api/v1/settings/log-types
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - search
+- name: mac-scanners
+  path: /api/v1/settings/mac-scanners
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+- name: mail-server-configuration
+  path: /api/v1/settings/mail-server-configuration
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+- name: metric-plugins
+  path: /api/v1/settings/metric-plugins
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+  extra_routes: 4
+- name: metric-policies
+  path: /api/v1/settings/metric-policies
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+  extra_routes: 2
+- name: metrics
+  path: /api/v1/settings/metrics
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - update
+  - delete
+  extra_routes: 3
+- name: motadata-app
+  path: /api/v1/system/motadata-app
+  mount: /system
+  verbs:
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+  extra_routes: 5
+- name: my-account
+  path: /api/v1/settings/my-account
+  mount: /settings
+  verbs:
+  - list
+  - update
+- name: netroute-policies
+  path: /api/v1/settings/netroute-policies
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+  extra_routes: 2
+- name: netroutes
+  path: /api/v1/settings/netroutes
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+  extra_routes: 2
+- name: noc-views
+  path: /api/v1/visualization/noc-views
+  mount: /visualization
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+- name: objects
+  path: /api/v1/settings/objects
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+  extra_routes: 6
+- name: password-policy
+  path: /api/v1/settings/password-policy
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+- name: penalty-profiles
+  path: /api/v1/settings/penalty-profiles
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+- name: personal-access-tokens
+  path: /api/v1/settings/personal-access-tokens
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+- name: protocol-mappers
+  path: /api/v1/settings/protocol-mappers
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+- name: proxy-server
+  path: /api/v1/settings/proxy-server
+  mount: /settings
+  verbs:
+  - get
+  - create
+  - delete
+- name: radius-servers
+  path: /api/v1/settings/radius-servers
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+- name: rebranding
+  path: /api/v1/settings/rebranding
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+- name: remote-event-processors
+  path: /api/v1/settings/remote-event-processors
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+  extra_routes: 4
+- name: reports
+  path: /api/v1/visualization/reports
+  mount: /visualization
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  extra_routes: 2
+- name: rum-policies
+  path: /api/v1/settings/rum-policies
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+  extra_routes: 2
+- name: rum-service-profiles
+  path: /api/v1/settings/rum-service-profiles
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+- name: runbook-plugins
+  path: /api/v1/settings/runbook-plugins
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+  extra_routes: 3
+- name: schedulers
+  path: /api/v1/settings/schedulers
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  extra_routes: 1
+- name: single-sign-on
+  path: /api/v1/settings/single-sign-on
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - update
+  extra_routes: 1
+- name: slo-cycles
+  path: /api/v1/settings/slo-cycles
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - update
+  extra_routes: 1
+- name: slo-profiles
+  path: /api/v1/settings/slo-profiles
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+- name: sms-gateway-configuration
+  path: /api/v1/settings/sms-gateway-configuration
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+- name: snmp-device-catalogs
+  path: /api/v1/settings/snmp-device-catalogs
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+  extra_routes: 6
+- name: snmp-oid-groups
+  path: /api/v1/settings/snmp-oid-groups
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+- name: snmp-trap-forwarders
+  path: /api/v1/settings/snmp-trap-forwarders
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+- name: snmp-trap-listener-configuration
+  path: /api/v1/settings/snmp-trap-listener-configuration
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+- name: snmp-trap-profiles
+  path: /api/v1/settings/snmp-trap-profiles
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+  extra_routes: 1
+- name: ssh-settings
+  path: /api/v1/settings/ssh-settings
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+- name: storage-profiles
+  path: /api/v1/settings/storage-profiles
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+  extra_routes: 1
+- name: system-files
+  path: /api/v1/settings/system-files
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+- name: system-processes
+  path: /api/v1/settings/system-processes
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+- name: system-services
+  path: /api/v1/settings/system-services
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+- name: tag-rules
+  path: /api/v1/settings/tag-rules
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+  extra_routes: 2
+- name: templates
+  path: /api/v1/visualization/templates
+  mount: /visualization
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - delete-all
+  extra_routes: 4
+- name: topology-plugins
+  path: /api/v1/settings/topology-plugins
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+  extra_routes: 3
+- name: trace-policies
+  path: /api/v1/settings/trace-policies
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+  extra_routes: 2
+- name: trace-services
+  path: /api/v1/settings/trace-services
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+  extra_routes: 5
+- name: two-factor-authentication
+  path: /api/v1/settings/two-factor-authentication
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - update
+- name: user-profiles
+  path: /api/v1/settings/user-profiles
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+  extra_routes: 3
+- name: user-roles
+  path: /api/v1/settings/user-roles
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+  extra_routes: 1
+- name: users
+  path: /api/v1/settings/users
+  mount: /settings
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+  extra_routes: 4
+- name: widgets
+  path: /api/v1/visualization/widgets
+  mount: /visualization
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+  - search
+  - delete-all
+  extra_routes: 1
+summary:
+  entity_count: 96
+  extra_route_count: 144
+  note: Relationship edges (has_one/has_many/belongs_to) are NOT asserted here. The shipped catalog gives paths, verbs and
+    column projections but no $ref graph, and inventing edges from field names would be a guess. The companion src/data/schemas.json
+    in the same bundle carries the per-entity field schemas if a future round wants to derive them properly.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

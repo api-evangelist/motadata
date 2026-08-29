@@ -1,0 +1,222 @@
+specification: API Commons MCP
+specificationVersion: '0.1'
+provider: Motadata
+providerId: motadata
+generated: '2026-08-29'
+method: derived
+source: npm observeops@2.3.1 (published 2026-08-22) — dist/index.js, src/mcp/server.ts and src/mcp/tools/*; the
+  tool table is read out of the published bundle, not authored.
+description: 'Motadata ships an MCP server inside its official ObserveOps CLI. `observeops mcp` exposes the ObserveOps
+  (AIOps) platform as typed MCP tools over stdio, holding one authenticated session for the whole conversation.
+  There is no hosted/remote MCP endpoint: an operator must install the npm package and log the CLI in to an instance
+  first, which is consistent with ObserveOps being an on-premise product with a per-customer host.'
+status: published
+deployment:
+  mode: local-stdio
+  install: 'npm install -g observeops   # then: claude mcp add observeops -- observeops mcp'
+  package: https://www.npmjs.com/package/observeops
+  auth: api-key
+  verified: probed
+  auth_note: The CLI authenticates with `observeops auth login` (host, user, password) and also accepts a Personal
+    Access Token; the MCP session inherits whichever credential the profile holds. Some tools (alert_action, raw_event,
+    watch_events) require a password session rather than a PAT because they use the Vert.x EventBus websocket.
+  probe:
+    command: node dist/index.js mcp  (initialize + tools/list over stdio, observeops@2.3.1 tarball)
+    result: 'refused before serving tools/list: "✗ No Motadata host configured. → observeops auth login"'
+    conclusion: Live tools/list is gated on an authenticated on-premise instance, so the tool table below was read
+      statically out of the published bundle instead. Names, titles, descriptions and the readOnly/destructive annotations
+      are verbatim; the zod inputSchemas were not transcribed.
+    date: '2026-08-29'
+clients_documented:
+- Claude Code
+- Claude Desktop
+- Cursor
+server:
+  name: observeops
+  version: 2.3.1
+tools:
+- name: whoami
+  category: meta
+  title: Session health check
+  description: Report the connected ObserveOps host, user, token type and expiry, TLS mode, permission count, server
+    version and which capabilities this session has (a personal access token cannot use the EventBus tools). Call
+    this first in a session, and again whenever another tool returns auth_required.
+  read_only: true
+- name: describe_surface
+  category: meta
+  title: Discover the platform surface
+  description: 'Offline discovery for everything not covered by a typed tool: search the CLI command catalog, the
+    96 generic resource types, the EventBus event types and the query data-source types by keyword. Use it to answer
+    "can this platform do X" before reaching for the resource or raw tools.'
+  read_only: true
+- name: search_monitors
+  category: inventory
+  title: Search the monitor inventory
+  description: Search monitored objects (devices, cloud accounts, applications) by free text, with pagination and
+    field projection. The inventory is only reachable through search, so this is the way to list monitors. Use get_monitor
+    for one monitor in depth.
+  read_only: true
+- name: get_monitor
+  category: inventory
+  title: Get one monitor with health
+  description: Fetch one monitor by numeric id or by name (exact match wins; a unique fuzzy match is accepted; anything
+    ambiguous returns the candidates). Includes current status and last-poll info; set include_instances for interfaces/disks/etc.
+    Poll-info values are epoch SECONDS.
+  read_only: true
+- name: monitor_counts
+  category: inventory
+  title: Monitor counts by status
+  description: Monitor counts grouped by status. The bucket set varies by server version (8.2.7 has FAIL, 10.0.0
+    does not) — whatever the server returns is passed through verbatim, so never assume a fixed key set.
+  read_only: true
+  destructive: true
+- name: set_monitor_state
+  category: inventory
+  title: Enable / disable / maintenance a monitor
+  description: 'Set a monitor to enable, disable or maintenance. The state enum is strict on purpose: the server
+    routes any unrecognised value to MAINTENANCE. `reason` is recorded in the audit trail and only applies to maintenance.'
+  destructive: true
+- name: search_alerts
+  category: alerts
+  title: Search active alerts
+  description: List currently-firing alerts, newest first, filterable by severity, monitor ids and free text. Each
+    row carries `policy.key` (needed by alert_action) and both the raw `event.timestamp` (epoch ms) and an `event.timestamp.iso`
+    twin. `duration` is in seconds. Severity lives in `severity`, never `policy.severity`.
+  read_only: true
+- name: alert_action
+  category: alerts
+  title: Acknowledge / clear / suppress alerts
+  description: 'Send an ack, unack, clear or suppress request for one or more alerts over the real-time event stream
+    (there is no REST route). Get `policy_keys` from search_alerts. HONESTY CONTRACT: the effect is unconfirmable
+    — the result reports {sent, server.activity, confirmed.by.event} and never claims success; re-run search_alerts
+    to verify. Needs a session login (not a PAT).'
+  destructive: true
+- name: run_discovery
+  category: discovery
+  title: Start a discovery job
+  description: Start a device discovery job by id or name. With follow=true the tool polls progress up to timeout_seconds
+    (default 60, max 300) and returns the final percentage and result summary; if the job is still going at the
+    deadline the result is status "still_running" — call again or check later, it is not an error. Provision what
+    was found with provision_monitors.
+  destructive: true
+- name: provision_monitors
+  category: discovery
+  title: Provision discovered objects into monitors
+  description: Turn a discovery job's results into monitors. This CREATES monitors and consumes licensed object
+    count. Rows whose discovery FAILED or that are already provisioned are skipped automatically; `objects` narrows
+    to specific names/ips/ids. Use dry_run=true first to see the exact payload. follow=true collects per-object
+    results from the event stream (needs a session login) for up to timeout_seconds.
+  destructive: true
+- name: manage_credential
+  category: manage
+  title: Credential profiles
+  description: 'List, get, template, create or update credential profiles (used by discovery and metric collection).
+    Call action=template first when creating: the profile''s context map is undeclared in the schema, and a profile
+    without one cannot authenticate. KNOWN SERVER BUG: updating a profile whose stored entity lacks credential.profile.context
+    hangs forever — the tool blocks that unless the update suppl'
+- name: manage_policy
+  category: manage
+  title: Alerting policies
+  description: 'List, get, create, update or delete alerting policies across the five families (metric, event, netroute,
+    trace, rum). Listing always goes through search — the plain GET route 500s on some server versions. Updates
+    are PATCH semantics: send only the fields to change. Writes support dry_run; deletes require an exact name or
+    id.'
+- name: resource
+  category: manage
+  title: Generic access to all 96 resource types
+  description: 'The long tail: list/get/create/update/delete any of the 96 catalog resource types (maintenance windows,
+    SLA policies, business hours, schedulers, ...). Start with action=types to find a type and action=describe to
+    see its verbs and required fields. Writes validate against the bundled entity schema, support dry_run, and updates
+    are PATCH semantics (send only the fields to change). Deletes require a'
+- name: ncm_backups
+  category: manage
+  title: Device configuration backups
+  description: 'Network configuration management, read-only by design: list device config backups, fetch the raw
+    backed-up configuration text for a device, or fetch the server''s conflict analysis against the assigned baseline.
+    Very large configs are truncated to fit the result budget.'
+  read_only: true
+- name: query_metrics
+  category: query
+  title: Query metric data
+  description: 'Time-series or aggregate metric queries over REST (PAT-friendly). Give one or more data points (e.g.
+    system.cpu.percent), an aggregator, a window and optional where-filters like "host contains web" (operators:
+    = != > < >= <= in, not in, contains, starts with, ends with). Monitor names are resolved to ids. Use dry_run=true
+    to inspect the exact request body. An empty result usually means the window'
+- name: query_events
+  category: query
+  title: Query log / trace / RUM / flow data
+  description: Query event-style data (logs, traces, RUM, flow) through POST /query/visualization with filters and
+    grouping. Pick a product for a sensible default data-source type, or set `type` explicitly (validated against
+    the 75 bundled types — an unknown type would silently return empty). values_of lists the distinct values of
+    one field over the window, which is how you discover what to filter on. Use d
+- name: run_widget
+  category: query
+  title: Run a saved widget
+  description: 'Execute a saved dashboard widget by id or name and return its data. This is the zero-risk query
+    path: saved widgets are known-good query contexts (the reference instance has thousands), so when a hand-built
+    query returns empty, find a widget that asks a similar question and run or copy it. Works with personal access
+    tokens.'
+  read_only: true
+- name: watch_events
+  category: streaming
+  title: Collect live events for a bounded window
+  description: Subscribe to the server's live broadcasts (fired alerts, status changes, discovery progress, config
+    changes, ...) for duration_seconds (default 30, max 120) and return what arrived. Filter by group (${EVENT_GROUPS.join(",
+    ")}) or by type substrings. Reaching the deadline is success — call again to keep watching. Needs a session
+    login (not a PAT). For current state use search_alerts; this stre
+  read_only: true
+- name: tail_logs
+  category: streaming
+  title: Tail logs or traps live (experimental)
+  description: 'EXPERIMENTAL (protocol not yet verified against a live instance): ask the server to stream log lines
+    or SNMP traps for duration_seconds (default 30, max 120), with SERVER-side filtering: sources narrows by source,
+    keywords substring-match the line before anything is sent. The stop request is guaranteed on every exit path
+    so the server never keeps producing for a client that left. Needs a session l'
+  read_only: true
+- name: raw_api
+  category: raw
+  title: Raw REST request (gated)
+  description: 'Escape hatch: send any REST request to the product API. The /api/v1 prefix is added for you; the
+    path''s first segment must be a known mount (settings, query, misc, visualization, system, ...) unless unknown=true.
+    Remember two server quirks: unknown paths answer MD022 "Unauthorized access" rather than 404, and the SPA answers
+    HTML with HTTP 200 for non-API paths (detected and refused). Prefer the t'
+  destructive: true
+- name: raw_event
+  category: raw
+  title: Raw EventBus action (gated)
+  description: 'Escape hatch for the real-time API: emit a ui.action.* event with a context and collect the correlated
+    reply frames for up to timeout_seconds. The address must start with "ui.action." (the only inbound surface the
+    bridge accepts). Saved widgets are the best source of working contexts — fetch one with run_widget or the resource
+    tool first. Needs a session login (not a PAT). Partial frames at t'
+  destructive: true
+- name: search_observability
+  category: agent
+  title: Ask the observability data a question
+  description: 'Natural-language search over metrics, logs, traces, RUM and flow data: give a question ("p95 checkout
+    latency last 6h", "log error count by source today") and the embedded agent grounds itself on this instance''s
+    saved widgets, builds a validated query and runs it over REST. Needs an LLM: an MCP host with sampling support
+    or ANTHROPIC_API_KEY; without one it returns capability_missing — use qu'
+  read_only: true
+tool_count: 22
+options:
+- flag: --read-only
+  effect: Suppresses every tool marked destructive.
+- flag: --allow-raw
+  effect: Required before raw_api and raw_event are registered; they are withheld by default.
+other_mcp_servers:
+- name: '@mtdt/observeops-ds-mcp'
+  version: 0.4.5
+  published: '2026-08-12'
+  mode: both
+  install: npx -y @mtdt/observeops-ds-mcp
+  binaries:
+  - observeops-ds-mcp (stdio)
+  - observeops-ds-mcp-http (http)
+  scope: Motadata ObserveOps DESIGN SYSTEM, not the platform API — it serves @mtdt/observeops-ds-spec to coding
+    agents.
+  official: false
+  note: Published by a personal npm maintainer account with no declared repository; first-party status unconfirmed,
+    so it is listed here rather than treated as the provider MCP surface.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

@@ -1,0 +1,325 @@
+# Motadata: AI-Powered Observability and IT Service Management
+
+> Motadata (Mindarray Systems) is a global IT software company that helps organizations run, secure, and automate their IT operations through two AI-native platforms built on a shared DFIT deep-learning foundation. ObserveOps (formerly known as AIOps) is a unified observability platform that brings metrics, logs, traces, flows, and topology into one backend with adaptive AI that needs no training period. ServiceOps is an ITIL-aligned IT and enterprise service management suite covering service desk, asset management, patch management, and workflow automation. Because both products share the same core, an observability alert in ObserveOps can automatically open, route, and close a ticket in ServiceOps.
+
+This file is a curated, human-organised map of Motadata's product, capability, documentation, and reference pages, intended for consumption by LLMs and AI agents. Every link is a current, on-topic page.
+
+## Products
+
+- [ObserveOps](https://www.motadata.com/products/observeops): Unified observability platform (formerly known as AIOps) correlating metrics, logs, traces, flows, and topology, with anomaly detection and multiple on-prem and cloud deployment modes.
+- [ServiceOps](https://www.motadata.com/products/serviceops): AI-powered, ITIL-aligned ITSM suite with service desk, CMDB, asset management, patch management, and automation.
+
+## ObserveOps Modules
+
+- [Network Observability](https://www.motadata.com/products/network-monitoring-tool): Availability and performance monitoring for network devices.
+- [Network Configuration & Compliance Management (NCCM)](https://www.motadata.com/products/network-automation-tool): Configuration and change automation for network infrastructure.
+- [Hybrid Infrastructure Monitoring](https://www.motadata.com/products/it-infrastructure-monitoring-tool): Unified visibility across servers, networks, and applications.
+- [Log Monitoring](https://www.motadata.com/products/log-analyzer): Centralised log collection, search, and analysis.
+- [Application Performance Monitoring](https://www.motadata.com/products/application-performance-monitoring): Tracing and performance monitoring for applications and services.
+- [Real User Monitoring](https://www.motadata.com/products/real-user-monitoring): End-user experience monitoring for web applications.
+- [Service Level Objectives](https://www.motadata.com/products/service-level-objectives): Defining and tracking SLOs for service delivery.
+
+## ServiceOps Modules
+
+- [Service Management](https://www.motadata.com/products/service-desk-software): ITIL-aligned service desk and ticketing.
+- [IT Asset & Configuration Management](https://www.motadata.com/products/it-asset-management): Discovery and lifecycle management of IT assets.
+- [Patch & Deployment Management](https://www.motadata.com/products/patch-management-software): Automated patching across operating systems.
+- [Agentic AI & Orchestration](https://www.motadata.com/products/agentic-ai-automation): AI agents and automation across service management workflows.
+- [MSP for ServiceOps](https://www.motadata.com/products/msp-edition): Multi-tenant edition for managed service providers.
+
+## Feature Deep-Dives: Monitoring and Observability
+
+- [Network Performance Monitoring](https://www.motadata.com/features/network-performance-monitoring)
+- [Network Performance Management](https://www.motadata.com/features/network-performance-management)
+- [Network Management System](https://www.motadata.com/features/network-management-system)
+- [Network Management Dashboard](https://www.motadata.com/features/network-management-dashboard)
+- [Enterprise Network Management](https://www.motadata.com/features/enterprise-network-management)
+- [Network Activity Monitoring](https://www.motadata.com/features/network-activity-monitoring)
+- [Network Interface Monitoring](https://www.motadata.com/features/network-interface-monitoring)
+- [Network Traffic Analysis](https://www.motadata.com/features/network-traffic-analysis)
+- [Network Anomaly Detection](https://www.motadata.com/features/network-anomaly-detection)
+- [Network Compliance Management](https://www.motadata.com/features/network-compliance-management)
+- [LAN Network Monitoring](https://www.motadata.com/features/lan-network-monitoring)
+- [Linux Network Monitoring](https://www.motadata.com/features/linux-network-monitoring)
+- [Virtual Network Management](https://www.motadata.com/features/virtual-network-management)
+- [Wi-Fi Monitoring](https://www.motadata.com/features/wi-fi-monitoring)
+- [Switch Monitoring](https://www.motadata.com/features/switch-monitoring)
+- [Network Switch Management](https://www.motadata.com/features/network-switch-management)
+- [Cisco Switch Management](https://www.motadata.com/features/cisco-switch-management)
+- [Router Monitoring](https://www.motadata.com/features/router-monitoring)
+- [SNMP Monitoring](https://www.motadata.com/features/snmp-monitoring)
+- [Flow Analytics](https://www.motadata.com/features/flow-analytics)
+- [Cisco ACI Monitoring](https://www.motadata.com/features/cisco-aci-monitoring)
+- [Cisco IPSLA Monitoring](https://www.motadata.com/features/cisco-ipsla-monitoring)
+- [URL Monitoring](https://www.motadata.com/features/url-monitoring)
+- [Server Monitoring](https://www.motadata.com/features/server-monitoring)
+- [Server Performance Monitoring](https://www.motadata.com/features/server-performance-monitoring)
+- [Linux Server Monitoring](https://www.motadata.com/features/linux-server-monitoring)
+- [CPU Usage Monitoring](https://www.motadata.com/features/cpu-usage-monitoring)
+- [Disk Space Monitor](https://www.motadata.com/features/disk-space-monitor)
+- [Process Monitoring](https://www.motadata.com/features/process-monitoring)
+- [Web Server Monitoring](https://www.motadata.com/features/web-server-monitoring)
+- [Database Monitoring](https://www.motadata.com/features/database-monitoring)
+- [MSSQL Monitoring](https://www.motadata.com/features/mssql-monitoring)
+- [MySQL Monitoring](https://www.motadata.com/features/mysql-monitoring)
+- [PostgreSQL Monitoring](https://www.motadata.com/features/postgresql-monitoring)
+- [Virtual Machine Monitoring](https://www.motadata.com/features/virtual-machine-monitoring)
+- [VMware Monitoring](https://www.motadata.com/features/vmware-monitoring)
+- [Hyper-V Monitoring](https://www.motadata.com/features/hyper-v-monitoring)
+- [Nutanix Monitoring](https://www.motadata.com/features/nutanix-monitoring-support)
+- [Citrix Xen Server Monitoring](https://www.motadata.com/features/citrix-xen-server-monitoring)
+- [Ubuntu Monitoring](https://www.motadata.com/features/ubuntu-monitoring)
+- [Data Center Management](https://www.motadata.com/features/data-center-management)
+- [Remote Monitoring](https://www.motadata.com/features/remote-monitoring)
+- [Real-Time Monitoring and Alerts](https://www.motadata.com/features/real-time-monitoring-alerts)
+- [Agent-Based Monitoring](https://www.motadata.com/features/agent-based-monitoring)
+- [Anomaly Detection and Predictive Analysis](https://www.motadata.com/features/anomaly-detection-predictive-analysis)
+- [Tag Management](https://www.motadata.com/features/tag-management)
+- [LAMA Framework](https://www.motadata.com/features/lama-framework-with-motadata)
+
+## Feature Deep-Dives: Log Management
+
+- [Log Management](https://www.motadata.com/features/log-management)
+- [Log Analysis](https://www.motadata.com/features/log-analysis)
+- [Log Explorer](https://www.motadata.com/features/log-explorer)
+- [Log Search](https://www.motadata.com/features/log-search)
+- [Log Aggregation](https://www.motadata.com/features/log-aggregation)
+- [Log Collection](https://www.motadata.com/features/log-collection)
+- [Log Parsing](https://www.motadata.com/features/log-parsing)
+- [Log Forwarder](https://www.motadata.com/features/log-forwarder)
+- [Log Live Tail](https://www.motadata.com/features/log-live-tail)
+- [Server Log Management](https://www.motadata.com/features/server-log-management)
+- [Application Log Monitoring](https://www.motadata.com/features/application-log-monitoring)
+- [Apache Log Monitoring](https://www.motadata.com/features/apache-log-monitoring)
+- [Firewall Log Monitoring](https://www.motadata.com/features/firewall-log-monitoring)
+- [Syslog Monitoring](https://www.motadata.com/features/syslog-monitoring)
+
+## Feature Deep-Dives: ITSM and ITIL Processes
+
+- [Incident Management](https://www.motadata.com/features/incident-management)
+- [Incident Life Cycle Management](https://www.motadata.com/features/incident-life-cycle-management)
+- [Problem Management](https://www.motadata.com/features/problem-management)
+- [Problem Life Cycle Management](https://www.motadata.com/features/problem-life-cycle-management)
+- [Change Management](https://www.motadata.com/features/change-management-software)
+- [Release Management](https://www.motadata.com/features/release-management)
+- [Service Request Management](https://www.motadata.com/features/service-request-management)
+- [Request Life Cycle Management](https://www.motadata.com/features/request-life-cycle-management)
+- [IT Service Catalog](https://www.motadata.com/features/it-service-catalog)
+- [Helpdesk Management](https://www.motadata.com/features/helpdesk-management)
+- [Knowledge Management](https://www.motadata.com/features/knowledge-management)
+- [Workflow Automation](https://www.motadata.com/features/workflow-automation)
+- [Project Management](https://www.motadata.com/features/project-management)
+- [Service Level Agreement](https://www.motadata.com/features/service-level-agreement)
+- [Operational Level Agreement](https://www.motadata.com/features/operational-level-agreement)
+- [ServiceNow Integration](https://www.motadata.com/features/servicenow-integration)
+- [WhatsApp and Telegram Integration](https://www.motadata.com/features/whatsapp-and-telegram-integration)
+
+## Feature Deep-Dives: Asset and Patch Management
+
+- [Hardware Asset Management](https://www.motadata.com/features/hardware-asset-management)
+- [Software Asset Management](https://www.motadata.com/features/software-asset-management)
+- [Software License Management](https://www.motadata.com/features/software-license-management)
+- [Software Metering](https://www.motadata.com/features/software-metering)
+- [IT Inventory Management](https://www.motadata.com/features/it-inventory-management-software)
+- [IT Asset Discovery](https://www.motadata.com/features/it-asset-discovery)
+- [IT Asset Scanning](https://www.motadata.com/features/it-asset-scanning-software)
+- [IT Asset Tracking](https://www.motadata.com/features/it-asset-tracking-tool)
+- [Contracts Management](https://www.motadata.com/features/contracts-management)
+- [Windows Patch Management](https://www.motadata.com/features/windows-patch-management)
+- [Linux Patch Management](https://www.motadata.com/features/linux-patch-management)
+- [Ubuntu Patch Management](https://www.motadata.com/features/ubuntu-patch-management)
+- [Remote Patch Management](https://www.motadata.com/features/remote-patch-management)
+
+## Comparisons
+
+- [Comparisons Hub](https://www.motadata.com/comparison): Feature and pricing comparisons against competing platforms.
+- [Motadata vs ManageEngine](https://www.motadata.com/comparisons/motadata-vs-manageengine)
+- [Motadata ServiceOps vs ManageEngine ServiceDesk Plus](https://www.motadata.com/comparisons/motadata-serviceops-vs-manageengine-sdp)
+- [Motadata vs SolarWinds](https://www.motadata.com/comparisons/motadata-vs-solarwinds)
+- [Motadata vs Dynatrace](https://www.motadata.com/comparisons/motadata-vs-dynatrace)
+- [Motadata vs PRTG](https://www.motadata.com/comparisons/motadata-vs-prtg)
+- [Motadata vs WhatsUp Gold](https://www.motadata.com/comparisons/motadata-vs-whatsup-gold)
+
+## Integrations
+
+- [Integrations Hub](https://www.motadata.com/integrations): Full catalog of ObserveOps monitored technologies and ServiceOps integrations.
+
+### ObserveOps: Databases
+
+- [Oracle](https://www.motadata.com/integrations/observeops/oracle)
+- [Oracle Database](https://www.motadata.com/integrations/observeops/oracle-database)
+- [Microsoft SQL Server](https://www.motadata.com/integrations/observeops/ms-sql)
+- [MySQL](https://www.motadata.com/integrations/observeops/mysql)
+- [MariaDB](https://www.motadata.com/integrations/observeops/maria-db)
+- [PostgreSQL](https://www.motadata.com/integrations/observeops/postgresql)
+- [MongoDB](https://www.motadata.com/integrations/observeops/mongodb)
+- [IBM Db2](https://www.motadata.com/integrations/observeops/ibm-db2)
+- [Redis](https://www.motadata.com/integrations/observeops/redisdb)
+- [Sybase](https://www.motadata.com/integrations/observeops/sybase)
+- [SAP HANA](https://www.motadata.com/integrations/observeops/sap-hana)
+- [SAP MaxDB](https://www.motadata.com/integrations/observeops/sap-max-db)
+- [Elasticsearch](https://www.motadata.com/integrations/observeops/elasticsearch)
+
+### ObserveOps: Web, Application Servers, and Middleware
+
+- [Apache HTTP Server](https://www.motadata.com/integrations/observeops/apache-http)
+- [Apache Tomcat](https://www.motadata.com/integrations/observeops/apache-tomcat)
+- [NGINX](https://www.motadata.com/integrations/observeops/nginx)
+- [Lighttpd](https://www.motadata.com/integrations/observeops/lighttpd)
+- [Microsoft IIS](https://www.motadata.com/integrations/observeops/microsoft-iis)
+- [WildFly](https://www.motadata.com/integrations/observeops/wildfly)
+- [WebLogic](https://www.motadata.com/integrations/observeops/weblogic)
+- [IBM WebSphere](https://www.motadata.com/integrations/observeops/ibm-websphere)
+- [HAProxy](https://www.motadata.com/integrations/observeops/ha-proxy)
+- [RabbitMQ](https://www.motadata.com/integrations/observeops/rabbitmq)
+- [IBM MQ](https://www.motadata.com/integrations/observeops/ibm-mq)
+- [MSMQ](https://www.motadata.com/integrations/observeops/msmq)
+- [.NET](https://www.motadata.com/integrations/observeops/net)
+
+### ObserveOps: Operating Systems
+
+- [Windows](https://www.motadata.com/integrations/observeops/windows)
+- [Windows Cluster](https://www.motadata.com/integrations/observeops/windows-cluster)
+- [Ubuntu](https://www.motadata.com/integrations/observeops/ubuntu)
+- [Red Hat Enterprise Linux](https://www.motadata.com/integrations/observeops/red-hat-enterprise-linux)
+- [SUSE Linux](https://www.motadata.com/integrations/observeops/suse-linux)
+- [Solaris](https://www.motadata.com/integrations/observeops/solaris)
+- [IBM AIX](https://www.motadata.com/integrations/observeops/ibm-aix)
+- [HP-UX](https://www.motadata.com/integrations/observeops/hp-ux)
+- [IBM AS/400](https://www.motadata.com/integrations/observeops/ibm-as400)
+
+### ObserveOps: Network Devices and Vendors
+
+- [Cisco Switch](https://www.motadata.com/integrations/observeops/cisco-switch)
+- [Cisco Router](https://www.motadata.com/integrations/observeops/cisco-router)
+- [Cisco Wireless](https://www.motadata.com/integrations/observeops/cisco-wireless)
+- [Juniper](https://www.motadata.com/integrations/observeops/juniper)
+- [Juniper Router](https://www.motadata.com/integrations/observeops/juniper-router)
+- [MikroTik](https://www.motadata.com/integrations/observeops/mikrotik)
+- [MikroTik Router](https://www.motadata.com/integrations/observeops/mikrotik-router)
+- [NETGEAR](https://www.motadata.com/integrations/observeops/netgear)
+- [D-Link](https://www.motadata.com/integrations/observeops/d-link)
+- [D-Link Router](https://www.motadata.com/integrations/observeops/d-link-router)
+- [Huawei Router](https://www.motadata.com/integrations/observeops/huawei-router)
+- [Brocade Communications](https://www.motadata.com/integrations/observeops/brocade-communications)
+- [Extreme Networks](https://www.motadata.com/integrations/observeops/extreme-networks)
+- [New H3C Technologies](https://www.motadata.com/integrations/observeops/new-h3c-technologies)
+- [New H3C Technologies Router](https://www.motadata.com/integrations/observeops/new-h3c-technologies-router)
+- [Radware](https://www.motadata.com/integrations/observeops/radware)
+- [Radware Router](https://www.motadata.com/integrations/observeops/radware-router)
+- [ALAXALA Networks](https://www.motadata.com/integrations/observeops/alaxala-networks)
+- [ALAXALA Networks Router](https://www.motadata.com/integrations/observeops/alaxala-networks-router)
+- [Alteon WebSystems](https://www.motadata.com/integrations/observeops/alteon-websystems)
+- [APRESIA Switch](https://www.motadata.com/integrations/observeops/apresia-switch)
+- [Dell Switch](https://www.motadata.com/integrations/observeops/dell-switch)
+- [Aruba Wireless](https://www.motadata.com/integrations/observeops/aruba-wireless)
+- [Ruckus Wireless](https://www.motadata.com/integrations/observeops/ruckus-wireless)
+- [Ruckus SmartZone](https://www.motadata.com/integrations/observeops/ruckus-smartzone)
+- [ZoneDirector](https://www.motadata.com/integrations/observeops/zonedirector)
+- [Meraki Wireless](https://www.motadata.com/integrations/observeops/windows-meraki-wireless)
+- [Hewlett Packard Enterprise](https://www.motadata.com/integrations/observeops/hewlett-packard-enterprise)
+- [American Power Conversion](https://www.motadata.com/integrations/observeops/american-power-conversion)
+
+### ObserveOps: Infrastructure Services
+
+- [Active Directory](https://www.motadata.com/integrations/observeops/active-directory)
+- [Directory Monitoring](https://www.motadata.com/integrations/observeops/directory-monitoring)
+- [Windows DNS](https://www.motadata.com/integrations/observeops/windows-dns)
+- [Windows DHCP](https://www.motadata.com/integrations/observeops/windows-dhcp)
+- [Linux DHCP](https://www.motadata.com/integrations/observeops/linux-dhcp)
+- [BIND 9](https://www.motadata.com/integrations/observeops/bind-9)
+- [Windows RDP](https://www.motadata.com/integrations/observeops/windows-rdp)
+- [File Monitoring](https://www.motadata.com/integrations/observeops/file-monitoring)
+- [Microsoft Exchange](https://www.motadata.com/integrations/observeops/microsoft-exchange)
+- [Zimbra](https://www.motadata.com/integrations/observeops/zimbra)
+
+### ServiceOps: Collaboration and Messaging
+
+- [Microsoft Teams](https://www.motadata.com/integrations/serviceops/microsoft-teams)
+- [Slack](https://www.motadata.com/integrations/serviceops/slack)
+- [WhatsApp](https://www.motadata.com/integrations/serviceops/whatsapp)
+- [Telegram](https://www.motadata.com/integrations/serviceops/telegram)
+- [Viber](https://www.motadata.com/integrations/serviceops/viber)
+- [Facebook Messenger](https://www.motadata.com/integrations/serviceops/facebook-messenger)
+- [Google Workspace](https://www.motadata.com/integrations/serviceops/google-workspace)
+- [Office 365](https://www.motadata.com/integrations/serviceops/office-365)
+
+### ServiceOps: Identity and Single Sign-On
+
+- [Azure AD](https://www.motadata.com/integrations/serviceops/azure-ad)
+- [Okta](https://www.motadata.com/integrations/serviceops/okta)
+- [OneLogin](https://www.motadata.com/integrations/serviceops/onelogin)
+- [JumpCloud](https://www.motadata.com/integrations/serviceops/jumpcloud)
+- [Keycloak](https://www.motadata.com/integrations/serviceops/keycloak)
+- [WSO2](https://www.motadata.com/integrations/serviceops/wso2)
+- [Active Directory Federation Services](https://www.motadata.com/integrations/serviceops/active-directory-federation-services)
+
+### ServiceOps: ITSM and Cross-Product
+
+- [Jira](https://www.motadata.com/integrations/serviceops/jira)
+- [ObserveOps to ServiceOps](https://www.motadata.com/integrations/serviceops/observeops): Native link so observability alerts open and close tickets automatically.
+
+## Solutions by Use Cases
+
+- [Solutions Overview](https://www.motadata.com/solutions/use-cases): Hub for industry, team, and use-case solutions.
+- [BFSI](https://www.motadata.com/solutions/bfsi)
+- [Finance](https://www.motadata.com/solutions/finance)
+- [Healthcare](https://www.motadata.com/solutions/healthcare)
+- [Telecom](https://www.motadata.com/solutions/telecom)
+- [Education](https://www.motadata.com/solutions/education)
+- [Manufacturing](https://www.motadata.com/solutions/manufacturing)
+- [Data Centre Monitoring](https://www.motadata.com/solutions/datacenter-monitoring)
+- [IT Service Desk Automation](https://www.motadata.com/solutions/it-service-desk-automation)
+- [IT Ticketing Management](https://www.motadata.com/solutions/it-ticketing-management)
+- [ITSM MSP](https://www.motadata.com/solutions/itsm-msp)
+- [IT Teams](https://www.motadata.com/solutions/it)
+- [NetOps Monitoring](https://www.motadata.com/solutions/netops)
+- [Network Administration](https://www.motadata.com/solutions/network-administration)
+- [Marketing](https://www.motadata.com/solutions/marketing)
+- [HR](https://www.motadata.com/solutions/hr)
+- [DevOps Observability](https://www.motadata.com/solutions/devops)
+
+## Solutions by Technologies
+
+- [Technologies Overview](https://www.motadata.com/solutions/technologies): Hub for technology-specific monitoring solutions.
+- [Docker Monitoring](https://www.motadata.com/solutions/docker-monitoring)
+- [Enterprise Network Monitoring](https://www.motadata.com/solutions/enterprise)
+- [AWS Monitoring](https://www.motadata.com/solutions/aws-monitoring)
+- [Cloud Monitoring](https://www.motadata.com/solutions/cloud-monitoring)
+- [Azure Monitoring](https://www.motadata.com/solutions/azure-monitoring)
+- [Kubernetes Monitoring](https://www.motadata.com/solutions/kubernetes-monitoring)
+- [REST API Monitoring](https://www.motadata.com/solutions/rest-api-monitoring)
+- [Storage Monitoring](https://www.motadata.com/solutions/storage-monitoring)
+
+
+## Documentation and Resources
+
+- [Documentation](https://www.motadata.com/docs): Product guides and references for ObserveOps and ServiceOps.
+- [Getting Started](https://www.motadata.com/getting-started): Onboarding and first-run guidance.
+- [Whitepapers](https://www.motadata.com/whitepapers): Research and technical guides.
+- [Ebooks](https://www.motadata.com/ebooks): In-depth guides on observability and IT operations.
+- [Product Brochures](https://www.motadata.com/product-brochures): Datasheets for ObserveOps and ServiceOps.
+- [Blog](https://www.motadata.com/blog): Articles on observability, AIOps, and ITSM.
+- [IT Glossary](https://www.motadata.com/it-glossary): Definitions of common IT operations and service management terms.
+- [Success Stories](https://www.motadata.com/success-stories): Customer case studies and outcomes.
+- [Community](https://www.motadata.com/community): User community and discussion.
+
+## Company
+
+- [About Motadata](https://www.motadata.com/company): Company background, mission, and platform overview.
+- [Careers](https://www.motadata.com/careers): Open roles and hiring information.
+- [Partner Portal](https://www.motadata.com/partner-portal): Partner program and resources.
+- [Partner Locator](https://www.motadata.com/partner-locator): Find a Motadata partner.
+- [Contact](https://www.motadata.com/contact-us): Contact sales or support.
+
+## Optional
+
+- [Request a Demo](https://www.motadata.com/request-demo): Book a guided product walkthrough.
+- [Free Trial](https://www.motadata.com/free-trial): Start an evaluation in your own environment.
+- [ObserveOps Demo](https://www.motadata.com/request-demo-observeops): Request an ObserveOps-specific demo.
+- [ServiceOps Demo](https://www.motadata.com/request-demo-serviceops): Request a ServiceOps-specific demo.
+- [ObserveOps Free Trial](https://www.motadata.com/free-trial-observeops): ObserveOps-specific free trial.
+- [ServiceOps Free Trial](https://www.motadata.com/free-trial-serviceops): ServiceOps-specific free trial.
+- [Webinars](https://www.motadata.com/webinars): On-demand and upcoming webinars.
+- [Events](https://www.motadata.com/events): Events and industry appearances.
+- [Press and News](https://www.motadata.com/press-release): Company news and press releases.

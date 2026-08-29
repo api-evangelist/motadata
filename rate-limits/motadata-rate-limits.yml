@@ -4,86 +4,75 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Motadata
 providerId: motadata
 created: '2026-05-04'
-# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
-# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-04'
+generated: '2026-08-29'
+modified: '2026-08-29'
+method: searched
+source: >-
+  https://docs.motadata.com/serviceops-docs/setup-and-operations/on-premises-installation/installation-guides/advanced-configurations/how-to-configure-api-rate-limit
 tags:
   - AIOps
   - Monitoring
   - Rate Limiting
-  - Quotas
-  - Throttling
-description: Machine-readable rate limit definitions for the Motadata API surface. Captures per-tier quotas,
-  burst behavior, response signaling, and recovery semantics. Defaults are scaffold values to be replaced
-  with published provider limits.
+description: >-
+  Motadata ServiceOps ships a configurable token-bucket API rate limiter. Because ServiceOps is
+  self-hosted, these are DEFAULTS the customer's administrator can change in advanced
+  configuration, not limits Motadata enforces on a shared multi-tenant service — there is no
+  per-plan or per-key quota, and no metered tier. Limits can also be scoped to named API groups
+  by path and HTTP method. ObserveOps documents no API rate limit.
+  This file replaced a 2026-05-04 bulk-sweep scaffold whose free/professional/enterprise tiers
+  and per-month quotas were invented; none of them exist.
+algorithm: token-bucket
+scope: server-wide, with optional per-API-group overrides
+configurable: true
 headers:
   limit: X-RateLimit-Limit
   remaining: X-RateLimit-Remaining
   reset: X-RateLimit-Reset
-  retryAfter: Retry-After
-  policy: RateLimit-Policy
+reset_units: milliseconds
 responseCodes:
-  throttled: 429
-  quotaExceeded: 429
-  serviceUnavailable: 503
+  throttled: null
+  note: >-
+    Motadata's rate-limit page documents the three response headers but does NOT state the HTTP
+    status or error body returned when the bucket is empty. Recorded as unknown rather than
+    assumed to be 429.
 limits:
-  - tier: free
-    name: Free Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 10
-    burst: 20
-    timeFrame: minute
+  - tier: default
+    name: ServiceOps default API rate limit
+    scope: server
+    metric: requests_per_second
+    limit: 20
+    burst: 30
+    timeFrame: second
+    configurable: true
+    settings:
+      enabled: true
+      apply-default-rate-limiting: true
+      refill-rate: 20
+      refill-interval: 1
+      bucket-capacity: 30
+      initial-bucket-capacity: 30
+      token-cache-timeout-minutes: 30
     applies:
-      - Motadata
-  - tier: free
-    name: Free Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 1000
-    timeFrame: month
-    applies:
-      - Motadata
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 100
-    burst: 200
-    timeFrame: minute
-    applies:
-      - Motadata
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 100000
-    timeFrame: month
-    applies:
-      - Motadata
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
-    scope: contract
-    metric: requests_per_minute
-    limit: 1000
-    burst: 5000
-    timeFrame: minute
-    applies:
-      - Motadata
-policies:
-  - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
-  - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
+      - Motadata ServiceOps
+    source: >-
+      https://docs.motadata.com/serviceops-docs/setup-and-operations/on-premises-installation/installation-guides/advanced-configurations/how-to-configure-api-rate-limit
+groups:
+  supported: true
+  keys:
+    - name
+    - routes
+    - path
+    - methods
+  description: >-
+    Named API groups can carry their own bucket settings, selected by request path and HTTP
+    method, so an administrator can rate-limit one route family differently from the rest.
+limit_count: 1
+observeops:
+  documented: false
+  note: >-
+    No published API rate limit for ObserveOps was found in its API documentation or in the
+    official observeops CLI, which implements retry/backoff for transport failures but carries
+    no rate-limit header handling.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

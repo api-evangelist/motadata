@@ -1,0 +1,65 @@
+specification: API Commons Agent Skills
+specificationVersion: '0.1'
+provider: Motadata
+providerId: motadata
+generated: '2026-08-29'
+method: searched
+source: >-
+  https://registry.npmjs.org/observeops — the first-party `observeops` CLI package
+  (observeops@2.3.1, published 2026-08-22) ships five Agent Skills under skills/ in
+  its npm tarball. Saved verbatim; not authored by API Evangelist.
+description: >-
+  Five Agent Skills published by Motadata for driving the ObserveOps (AIOps) observability
+  platform through the official `observeops` CLI. Motadata distributes them inside the npm
+  package and installs them with `observeops skills install` or `npx skills add pmg-motadata/cli`.
+install:
+  - "observeops skills install"
+  - "npx skills add pmg-motadata/cli"
+api: motadata:observeops
+license: UNLICENSED
+skills:
+  - name: observeops
+    file: skills/motadata-observeops.md
+    category: core
+    role: router
+    description: >-
+      Motadata ObserveOps router. Dispatches to the specific skill for the task —
+      operating the CLI, monitors, alert triage, discovery, configuration resources,
+      device config backup, live event streaming and real-time queries.
+  - name: observeops-cli
+    file: skills/motadata-observeops-cli.md
+    category: core
+    description: >-
+      Operate the ObserveOps CLI: authentication and profiles, monitor inventory and health,
+      active alerts, discovery jobs, credential profiles, alerting policies, dashboards and
+      widgets, network configuration backups, live event streaming, and raw API calls.
+  - name: observeops-resources
+    file: skills/motadata-observeops-resources.md
+    category: core
+    description: >-
+      Create, update and delete any of the 96 ObserveOps resource types safely, using the
+      product's own entity schemas for local validation. Covers dotted literal keys, required
+      fields and enums, PATCH semantics, prerequisites and the resource catalog.
+  - name: observeops-triage
+    file: skills/motadata-observeops-triage.md
+    category: features
+    description: >-
+      Diagnose a live incident on an ObserveOps instance: find what is firing, decide whether
+      it is real, isolate the blast radius, and hand back a written summary.
+  - name: observeops-eventbus
+    file: skills/motadata-observeops-eventbus.md
+    category: features
+    description: >-
+      Stream live events from an ObserveOps instance and run real-time queries over its
+      Vert.x EventBus bridge. Covers the session-id requirement, NDJSON output, the
+      widget-context route into the query DSL and the silent-stream failure modes.
+notes:
+  - >-
+    The skills are versioned with the CLI, and each ships an evals/evals.json alongside its
+    SKILL.md in the npm tarball; only the SKILL.md bodies are mirrored here.
+  - >-
+    Every skill is licensed UNLICENSED in its own frontmatter — mirrored here for reference
+    and provenance, not redistributed under any other terms.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

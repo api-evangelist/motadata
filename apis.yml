@@ -1,64 +1,206 @@
 aid: motadata
 name: Motadata
 description: >-
-  Motadata is an AIOps platform for IT infrastructure monitoring, log management, network analytics, and service desk automation.
+  Motadata (Mindarray Systems) is a global IT software company running two AI-native platforms on
+  a shared deep-learning foundation: ObserveOps, a unified observability and AIOps platform that
+  brings metrics, logs, traces, flows and topology into one backend, and ServiceOps, an
+  ITIL-aligned IT and enterprise service management suite covering service desk, CMDB, asset
+  management, patch management and workflow automation. Both products are deployed in the
+  customer's own environment, so every API host, credential and rate limit belongs to the
+  customer rather than to Motadata. ObserveOps exposes a REST API at /api/v1 across 96
+  configuration resource types plus a Vert.x EventBus websocket for live streams, and ships an
+  official agent-first CLI that doubles as an MCP server with 22 tools and five packaged Agent
+  Skills. ServiceOps exposes a documented REST API over OAuth 2.0 or an API key across request,
+  problem, change, release, CMDB, asset and service-catalog objects. Motadata publishes no
+  OpenAPI for either product.
 type: Index
 deliveryModel:
-  model: unknown
+  model: self-hosted
   open_source: false
-  commercial: false
+  commercial: true
   callable_host: false
-  label: Delivery model not determined — needs a product licence on record
-  confidence: low
+  label: Commercial software deployed on the customer's own infrastructure
+  confidence: high
   source:
-  - none
-  generated: '2026-08-28'
-  method: derived
+  - https://www.motadata.com/free-trial
+  - https://docs.motadata.com/serviceops-docs/setup-and-operations/on-premises-installation/
+  - npm observeops@2.3.1 (auth login prompts for the customer's host)
+  generated: '2026-08-29'
+  method: searched
 accessModel:
-  pricing: freemium
-  onboarding: unknown
-  trial: false
+  pricing: quote
+  onboarding: sales
+  trial: true
   try_now: false
   public: false
-  label: Freemium
-  confidence: medium
+  label: Quote-based, sales-led; trial requested through a form
+  confidence: high
   source:
-  - plans
-  generated: '2026-07-22'
-  method: derived
+  - plans/motadata-plans-pricing.yml
+  generated: '2026-08-29'
+  method: searched
+  note: >-
+    Corrected 2026-08-29. The previous "freemium" reading was derived from a bulk-sweep plans
+    scaffold that invented free/professional/enterprise tiers; www.motadata.com/pricing returns
+    HTTP 404 and Motadata publishes no price anywhere.
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/motadata.png
 tags:
   - AIOps
   - Monitoring
+  - Observability
+  - ITSM
+  - Service Desk
+  - Network Monitoring
+  - Log Management
+  - IT Operations
+  - Application Performance Monitoring
+  - OpenTelemetry
 url: >-
   https://raw.githubusercontent.com/api-evangelist/motadata/refs/heads/main/apis.yml
 created: '2026-03-27'
-modified: '2026-03-27'
+modified: '2026-08-29'
 specificationVersion: '0.23'
 apis:
-  - aid: motadata:motadata
-    name: Motadata
+  - aid: motadata:observeops
+    name: Motadata ObserveOps
     description: >-
-      Motadata is an AIOps platform for IT infrastructure monitoring, log management, network analytics, and service desk automation.
-    humanURL: https://www.motadata.com
+      ObserveOps (formerly Motadata AIOps) is a unified observability platform correlating
+      metrics, logs, traces, flows and topology with anomaly detection that needs no training
+      period. Its REST API is mounted at /api/v1 across three mounts (/settings, /visualization,
+      /system) covering 96 configuration resource types, with a Vert.x EventBus websocket bridge
+      for live alerts, events and real-time queries. Authentication is a Personal Access Token,
+      a static client.id cookie, or a username/password session; the websocket surface requires
+      the session. Errors come back as proprietary MD-prefixed codes rather than RFC 9457
+      problem documents, and Motadata publishes no OpenAPI.
+    humanURL: https://www.motadata.com/products/observeops
+    baseURL: https://{observeops-host}/api/v1
     tags:
       - AIOps
+      - Observability
+      - Monitoring
+      - Log Management
     properties:
       - type: Documentation
-        url: https://docs.motadata.com
+        url: https://docs.motadata.com/observeops-docs/
+      - type: APIReference
+        url: https://docs.motadata.com/observeops-docs/API%20Documentation/observeops-api-documentation
+      - type: ReleaseNotes
+        url: https://docs.motadata.com/observeops-docs/motadata-release-notes/overview
+      - type: DataModel
+        url: data-model/motadata-data-model.yml
+      - type: ErrorCatalog
+        url: errors/motadata-problem-types.yml
+      - type: MCPServer
+        url: mcp/motadata-mcp.yml
+      - type: AgentSkill
+        url: skills/_index.yml
+      - type: CLI
+        url: cli/motadata-cli.yml
+    x-base-url-note: >-
+      Templated on purpose. ObserveOps is deployed on the customer's own infrastructure; the CLI
+      prompts for the host at `observeops auth login`. There is no Motadata-operated API host.
+  - aid: motadata:serviceops
+    name: Motadata ServiceOps
+    description: >-
+      ServiceOps is Motadata's AI-powered, ITIL-aligned IT and enterprise service management
+      suite. Its REST API lets third-party systems create, read, update and delete requests,
+      problems, changes, releases, service requests, conversations, assets, hardware components,
+      CMDB configuration items and discovery components, plus system-field and user-management
+      lookups, across roughly 106 documented endpoint pages. Authentication is either an OAuth
+      2.0 password grant at /api/oauth/token or an API key sent as `Authorization: Apikey <key>`.
+      A configurable token-bucket rate limiter (20 requests/second, burst 30 by default) signals
+      through X-RateLimit-* headers. Motadata publishes no OpenAPI.
+    humanURL: https://www.motadata.com/products/serviceops
+    baseURL: https://{serviceops-host}/api
+    tags:
+      - ITSM
+      - Service Desk
+      - Asset Management
+      - CMDB
+    properties:
+      - type: Documentation
+        url: https://docs.motadata.com/serviceops-docs/
+      - type: APIReference
+        url: https://docs.motadata.com/serviceops-docs/integration-docs/introduction
+      - type: GettingStarted
+        url: https://docs.motadata.com/serviceops-docs/integration-docs/managing-request-using-api
+      - type: ReleaseNotes
+        url: https://docs.motadata.com/serviceops-docs/release-notes/
+      - type: Authentication
+        url: authentication/motadata-authentication.yml
+      - type: OAuthScopes
+        url: scopes/motadata-scopes.yml
+      - type: RateLimits
+        url: rate-limits/motadata-rate-limits.yml
+    x-base-url-note: >-
+      Templated on purpose. ServiceOps is deployed on the customer's own infrastructure and
+      Motadata's own documentation writes the base as {{server-url}}.
 common:
-  - type: DomainSecurity
-    url: security/motadata-domain-security.yml
-  - type: GitHubOrganization
-    url: https://github.com/motadata
-  - type: LinkedIn
-    url: https://www.linkedin.com/company/motadata
   - type: Website
     url: https://www.motadata.com
   - type: Documentation
     url: https://docs.motadata.com
-  - url: https://www.motadata.com/blog
-    type: Blog
+  - type: Blog
+    url: https://www.motadata.com/blog
+  - type: GettingStarted
+    url: https://www.motadata.com/getting-started
+  - type: Support
+    url: https://support.motadata.com/support-portal
+  - type: SignUp
+    url: https://www.motadata.com/free-trial
+  - type: TermsOfService
+    url: https://www.motadata.com/terms-of-service
+  - type: PrivacyPolicy
+    url: https://www.motadata.com/privacy-policy
+  - type: GitHubOrganization
+    url: https://github.com/motadata
+  - type: SourceCode
+    url: https://github.com/motadata2025
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/motadata
+  - type: LLMsTxt
+    url: llms/motadata-llms.txt
+  - type: Packages
+    url: packages/motadata-packages.yml
+  - type: SDKs
+    url: packages/motadata-packages.yml
+  - type: MCPServer
+    url: mcp/motadata-mcp.yml
+  - type: AgentSkill
+    url: skills/_index.yml
+  - type: CLI
+    url: cli/motadata-cli.yml
+  - type: Components
+    url: components/motadata-components.yml
+  - type: Authentication
+    url: authentication/motadata-authentication.yml
+  - type: OAuthScopes
+    url: scopes/motadata-scopes.yml
+  - type: Conventions
+    url: conventions/motadata-conventions.yml
+  - type: Conformance
+    url: conformance/motadata-conformance.yml
+  - type: ErrorCatalog
+    url: errors/motadata-problem-types.yml
+  - type: DataModel
+    url: data-model/motadata-data-model.yml
+  - type: Lifecycle
+    url: lifecycle/motadata-lifecycle.yml
+  - type: ChangeLog
+    url: changelog/motadata-changelog.yml
+  - type: RateLimits
+    url: rate-limits/motadata-rate-limits.yml
+  - type: Plans
+    url: plans/motadata-plans-pricing.yml
+  - type: FinOps
+    url: finops/motadata-finops.yml
+  - type: DomainSecurity
+    url: security/motadata-domain-security.yml
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+x-enrichment:
+  date: '2026-08-29'
+  status: enriched
+  artifacts_added: 21
+  pass: local-v1

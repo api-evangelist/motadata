@@ -1,0 +1,65 @@
+specification: API Commons Lifecycle
+specificationVersion: '0.1'
+provider: Motadata
+providerId: motadata
+generated: '2026-08-29'
+method: searched
+source: >-
+  https://docs.motadata.com/serviceops-docs/release-notes/,
+  https://docs.motadata.com/observeops-docs/motadata-release-notes/overview,
+  https://support.motadata.com/support-portal, and probes of status.motadata.com (2026-08-29)
+description: >-
+  Lifecycle posture for the Motadata API surface. Motadata versions its PRODUCTS and publishes
+  dated release notes for both, but publishes no API versioning policy, no deprecation policy,
+  no Sunset/Deprecation header commitment, no SLA and no public status page. Because both
+  products are deployed on the customer's own infrastructure, availability is the customer's,
+  which is a coherent reason for the absent status page — but it does not explain the absent
+  deprecation policy, which would still bind the contract each customer upgrades into.
+versioning:
+  api_version: v1
+  scheme: path-prefix
+  detail: >-
+    ObserveOps mounts its REST surface at /api/v1; ServiceOps documents an "V1 API" and mounts
+    OAuth at /api/oauth/token. Neither product documents how a v2 would be introduced or how
+    long v1 is supported.
+  product_versions:
+    serviceops: 8.7.5
+    observeops: 10.0.0
+  server_version_matters: true
+  server_version_note: >-
+    Callers must branch on the server version they are talking to. Motadata's own agent skill
+    instructs an agent to read the version from `observeops info` "rather than assuming", and
+    names a concrete divergence: the monitor-status bucket set differs between 8.2.7 and 10.0.0.
+    In an on-premise product the deployed version, not a header, is the contract.
+deprecation_policy:
+  published: false
+  sunset_header: false
+  deprecation_header: false
+  rfc8594: false
+  note: >-
+    No deprecation policy, deprecation schedule, or Sunset/Deprecation header usage was found in
+    either product's documentation or in the official CLI. No `Deprecation` pointer is emitted.
+status_page:
+  published: false
+  probes:
+    - url: https://status.motadata.com/
+      status: null
+      note: DNS does not resolve — no such host.
+  note: >-
+    Both products are self-hosted, so there is no Motadata-operated runtime to report on. No
+    `StatusPage` pointer is emitted.
+sla:
+  published: false
+  note: No public SLA or uptime commitment found.
+support:
+  portal: https://support.motadata.com/support-portal
+  status: 200
+  note: >-
+    The support portal is itself a Motadata ServiceOps instance (its /.well-known/* paths all
+    answer with the ServiceOps single-page-app shell). Access requires a login.
+  community: https://www.motadata.com/community
+  email: support@motadata.com
+deprecated_operations: []
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

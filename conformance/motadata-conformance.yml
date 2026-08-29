@@ -1,0 +1,154 @@
+specification: API Commons Conformance
+specificationVersion: '0.1'
+provider: Motadata
+providerId: motadata
+generated: '2026-08-29'
+method: searched
+source: >-
+  https://docs.motadata.com/serviceops-docs/integration-docs/,
+  https://docs.motadata.com/observeops-docs/API%20Documentation/,
+  github.com/motadata2025 (opentelemetry-collector, opentelemetry-java-instrumentation,
+  opentelemetry-dotnet-instrumentation, motadata-helm-charts, motadata-apm-* instrumentation),
+  packagist.org/packages/motadata-apm/custom-instrumentation, npm observeops@2.3.1.
+  Probed 2026-08-29.
+description: >-
+  Cross-cutting and domain standard conformance for Motadata. The headline is a real split:
+  Motadata's INGESTION side speaks an open standard properly — OpenTelemetry, all the way down to
+  forking the collector and shipping per-language instrumentation — while its own management API
+  speaks nothing standard at all: a proprietary MD-code error envelope, no RFC 9457, no
+  standard pagination, no OpenAPI, no scopes that partition anything.
+conformance:
+  - id: opentelemetry
+    label: OpenTelemetry / OTLP
+    conforms: true
+    role: ingestion
+    evidence:
+      - >-
+        Motadata publishes per-language APM custom-instrumentation libraries described as helpers
+        "for OpenTelemetry spans" — PHP (packagist motadata-apm/custom-instrumentation v1.0.0),
+        plus Java, .NET, Node.js, Python, Go, Ruby and C++ on github.com/motadata2025.
+      - >-
+        github.com/motadata2025 carries forks of opentelemetry-collector,
+        opentelemetry-java-instrumentation, opentelemetry-dotnet-instrumentation,
+        opentelemetry-dotnet, opentelemetry-java and opentelemetry.io.
+      - >-
+        github.com/motadata2025/motadata-helm-charts (Apache-2.0) ships the OpenTelemetry
+        collector and target allocator charts, tagged opentelemetry-target-allocator-0.126.10.
+    note: >-
+      This is the one place a customer who already speaks a standard integrates with Motadata
+      without a bespoke connector. No public OTLP endpoint URL is published, because ObserveOps
+      is deployed in the customer's environment — the endpoint is theirs.
+  - id: rum-events-format
+    label: Datadog RUM events format
+    conforms: true
+    role: ingestion
+    evidence:
+      - >-
+        The Motadata RUM browser SDK is a declared fork of the Datadog browser-sdk
+        (github.com/motadata2025/browser-sdk), and github.com/motadata2025/rum-events-format
+        carries the JSON schema of the RUM events the SDKs send.
+    note: A de-facto vendor format rather than an open standard, recorded because it is a real, schema-backed interoperability surface.
+  - id: oauth2
+    label: OAuth 2.0
+    conforms: partial
+    evidence:
+      - >-
+        ServiceOps implements the resource-owner-password-credentials grant at
+        /api/oauth/token with Basic client authentication and a standard token response
+        (access_token, token_type Bearer, expires_in, scope).
+    deviations:
+      - Password grant only; no authorization code, no PKCE, no refresh-token flow documented.
+      - No authorization server metadata — /.well-known/oauth-authorization-server 404s on every host.
+      - One constant scope value (other-api-scope) that does not partition access.
+      - ObserveOps has no OAuth surface at all.
+  - id: oidc
+    label: OpenID Connect
+    conforms: false
+    evidence:
+      - /.well-known/openid-configuration returns 404 on www.motadata.com and docs.motadata.com, and the SPA shell on support.motadata.com.
+  - id: rfc9457
+    label: RFC 9457 Problem Details for HTTP APIs
+    conforms: false
+    evidence:
+      - >-
+        ObserveOps returns a proprietary MD-prefixed code envelope (150 codes, MD000 = success),
+        not application/problem+json. See errors/motadata-problem-types.yml.
+      - Unknown paths answer MD022 "Unauthorized access" rather than an HTTP 404.
+  - id: openapi
+    label: OpenAPI
+    conforms: false
+    evidence:
+      - >-
+        No spec at /openapi.json, /openapi.yaml, /swagger.json or /api-docs on www.motadata.com
+        or docs.motadata.com (all 404). The ObserveOps API reference is rendered by
+        docusaurus-theme-openapi-docs — the CSS class openapi-tabs__security-schemes is present
+        in the built pages — so an OpenAPI source demonstrably exists upstream, but the built
+        site exposes no download link and serves no spec file.
+  - id: scim
+    label: SCIM
+    conforms: false
+    evidence:
+      - No urn:ietf:params:scim schema URN appears anywhere in the documentation or in the CLI's embedded entity schemas; user management is a proprietary /settings/users resource.
+  - id: odata
+    label: OData
+    conforms: false
+  - id: json-api
+    label: JSON:API
+    conforms: false
+  - id: idempotency
+    label: Idempotency keys
+    conforms: false
+    evidence:
+      - No idempotency header or request-deduplication mechanism in either product's documentation or in the official CLI.
+  - id: pagination
+    label: Standard pagination
+    conforms: partial
+    evidence:
+      - Search is a POST with a filter body; the official CLI handles paging for the caller but the raw paging parameters are not published.
+  - id: rfc8594
+    label: RFC 8594 Sunset header
+    conforms: false
+    evidence:
+      - No deprecation or sunset policy or header published. See lifecycle/motadata-lifecycle.yml.
+  - id: rfc9116
+    label: RFC 9116 security.txt
+    conforms: false
+    evidence:
+      - /.well-known/security.txt 404s on www.motadata.com and docs.motadata.com; support.motadata.com answers 200 with the ServiceOps SPA shell, which is not a document.
+  - id: itil
+    label: ITIL
+    conforms: claimed
+    evidence:
+      - >-
+        Motadata describes ServiceOps as an "ITIL-aligned" IT and enterprise service management
+        suite in its own llms.txt, and the API surface is organised on ITIL objects — request,
+        problem, change, release, CMDB/CI, service catalog.
+    note: >-
+      Recorded as claimed rather than conforming: ITIL is a process framework with no wire
+      contract to conform to, so this cannot be verified from a spec. It is recorded because the
+      API's resource vocabulary genuinely follows it, which is what an ITSM integrator needs to know.
+domain_standard:
+  market: IT operations, observability and ITSM
+  standard: opentelemetry
+  declared_in_contract: true
+  where: >-
+    Not in an API contract — Motadata publishes none. Declared in the shipped artifacts: the
+    OpenTelemetry collector fork, the per-language instrumentation libraries that emit
+    OpenTelemetry spans, and the Helm charts for the collector and target allocator.
+  note: >-
+    Recorded on the ingestion side only. The management API declares no domain standard, and
+    nothing was invented to fill the slot.
+compliance_certifications:
+  published: false
+  probes:
+    - url: https://www.motadata.com/security
+      status: 404
+    - url: https://www.motadata.com/trust
+      status: 404
+  note: >-
+    No trust center and no named certification (SOC 2, ISO 27001, PCI DSS, HIPAA, FedRAMP) was
+    found on the Motadata site, in its llms.txt page map, or in the documentation. No
+    `Compliance` pointer is emitted — the absence is the finding.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

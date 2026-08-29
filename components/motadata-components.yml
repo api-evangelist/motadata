@@ -1,0 +1,53 @@
+specification: API Commons Components
+specificationVersion: '0.1'
+provider: Motadata
+providerId: motadata
+generated: '2026-08-29'
+method: searched
+source: registry.npmjs.org — @mtdt/observeops-ds-elements, -ds-css, -ds-spec (probed 2026-08-29)
+description: >-
+  A Motadata-branded ObserveOps design system is published to npm as framework-agnostic Web
+  Components with an `obs-` custom element prefix, alongside a design-token/CSS package and a
+  machine-readable spec package intended to be served to coding agents through its own MCP
+  server. These are UI components for building against or alongside ObserveOps, distinct from
+  the RUM SDKs in packages/motadata-packages.yml, which instrument a page rather than render one.
+caveat: >-
+  Provenance is NOT confirmed first-party. The packages are scoped to the @mtdt npm org and are
+  explicitly named for Motadata ObserveOps, but they declare no repository, github.com/mtdt has
+  no public repos, and they are published by a single personal maintainer account
+  (niravbhatt1317). Recorded as Motadata-branded; not credited to Motadata as an official
+  developer surface.
+families:
+  - name: ObserveOps Design System Elements
+    kind: web-components
+    prefix: obs-
+    package: '@mtdt/observeops-ds-elements'
+    registry: npm
+    version: 0.1.166
+    published: '2026-08-12'
+    url: https://www.npmjs.com/package/@mtdt/observeops-ds-elements
+    description: ObserveOps design system as framework-agnostic Web Components (obs-*).
+  - name: ObserveOps Design System CSS
+    kind: design-tokens
+    package: '@mtdt/observeops-ds-css'
+    registry: npm
+    version: 0.1.6
+    published: '2026-08-12'
+    url: https://www.npmjs.com/package/@mtdt/observeops-ds-css
+    description: Exact design tokens (light and dark) plus structural CSS — the "look" package.
+  - name: ObserveOps Design System Spec
+    kind: machine-readable-spec
+    package: '@mtdt/observeops-ds-spec'
+    registry: npm
+    version: 0.1.208
+    published: '2026-08-12'
+    url: https://www.npmjs.com/package/@mtdt/observeops-ds-spec
+    description: >-
+      Machine-readable spec and AI operating contract for the design system. Served to agents by
+      @mtdt/observeops-ds-mcp — an unusual and notable pattern: the design system ships its own
+      MCP server so a coding agent can read the component contract rather than guess it.
+loaders: []
+hosted_surfaces: []
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

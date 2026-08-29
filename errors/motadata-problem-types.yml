@@ -1,0 +1,482 @@
+specification: API Commons Error Catalog
+specificationVersion: '0.1'
+provider: Motadata
+providerId: motadata
+generated: '2026-08-29'
+method: derived
+source: npm observeops@2.3.1 — src/data/error-codes.json, embedded verbatim in the published dist/index.js bundle.
+description: Motadata ObserveOps returns a product-specific MD-prefixed error code in its response envelope rather
+  than an RFC 9457 problem document. This is the platform error table Motadata ships inside its own official CLI,
+  mirrored here verbatim.
+format: proprietary
+rfc9457: false
+envelope:
+  code_field: code
+  code_pattern: ^MD\d{3}$
+  success_code: MD000
+  note: MD000 means success — the envelope carries a code on every response, not only failures.
+quirks:
+- Unknown or unmounted API paths answer MD022 "Unauthorized access" rather than HTTP 404, so a 200-with-MD022 is
+  the real "not found".
+- Non-API paths are answered by the single-page app with HTTP 200 and an HTML body; the official CLI detects and
+  refuses this.
+- Payload validation failures collapse into a single MD022 per round trip, one error at a time — the reason Motadata
+  ships entity schemas in the CLI for local validation before sending.
+problem_types:
+- code: MD000
+  meaning: Success
+  constant: ERROR_CODE_SUCCESS
+- code: MD001
+  meaning: Ping Failed
+  constant: ERROR_CODE_PING_FAILED
+- code: MD002
+  meaning: Invalid Port
+  constant: ERROR_CODE_INVALID_PORT
+- code: MD003
+  meaning: Invalid Credentials
+  constant: ERROR_CODE_INVALID_CREDENTIALS
+- code: MD004
+  meaning: Timeout
+  constant: ERROR_CODE_TIMEOUT
+- code: MD005
+  meaning: Invalid Database
+  constant: ERROR_CODE_INVALID_DATABASE
+- code: MD006
+  meaning: Unauthorized Database Access
+  constant: ERROR_CODE_UNAUTHORIZED_DATABASE_ACCESS
+- code: MD007
+  meaning: Unauthorized Url Access
+  constant: ERROR_CODE_UNAUTHORIZED_URL_ACCESS
+- code: MD008
+  meaning: Api Invalid Secret Key
+  constant: ERROR_CODE_API_INVALID_SECRET_KEY
+- code: MD009
+  meaning: Api Invalid Access Key
+  constant: ERROR_CODE_API_INVALID_ACCESS_KEY
+- code: MD010
+  meaning: Api Invalid Tenant Id
+  constant: ERROR_CODE_API_INVALID_TENANT_ID
+- code: MD011
+  meaning: Api Invalid Subscription Id
+  constant: ERROR_CODE_API_INVALID_SUBSCRIPTION_ID
+- code: MD012
+  meaning: Api Invalid Client Id
+  constant: ERROR_CODE_API_INVALID_CLIENT_ID
+- code: MD013
+  meaning: Database Login
+  constant: ERROR_CODE_DATABASE_LOGIN
+- code: MD014
+  meaning: Login Invalid Refresh Token
+  constant: ERROR_CODE_LOGIN_INVALID_REFRESH_TOKEN
+- code: MD015
+  meaning: Login Ldap User Not Configured
+  constant: ERROR_CODE_LOGIN_LDAP_USER_NOT_CONFIGURED
+- code: MD016
+  meaning: Login Ldap User Not Allowed
+  constant: ERROR_CODE_LOGIN_LDAP_USER_NOT_ALLOWED
+- code: MD017
+  meaning: Login Invalid Ldap User
+  constant: ERROR_CODE_LOGIN_INVALID_LDAP_USER
+- code: MD018
+  meaning: Login User Disabled
+  constant: ERROR_CODE_LOGIN_USER_DISABLED
+- code: MD019
+  meaning: Login Ldap Auth Disabled
+  constant: ERROR_CODE_LOGIN_LDAP_AUTH_DISABLED
+- code: MD020
+  meaning: Login Ldap Server Error
+  constant: ERROR_CODE_LOGIN_LDAP_SERVER_ERROR
+- code: MD021
+  meaning: Login Invalid Credentials
+  constant: ERROR_CODE_LOGIN_INVALID_CREDENTIALS
+- code: MD022
+  meaning: Bad Request
+  constant: ERROR_CODE_BAD_REQUEST
+- code: MD023
+  meaning: Ldap Config Test
+  constant: ERROR_CODE_LDAP_CONFIG_TEST
+- code: MD024
+  meaning: Email Config Test
+  constant: ERROR_CODE_EMAIL_CONFIG_TEST
+- code: MD025
+  meaning: Sms Config Test
+  constant: ERROR_CODE_SMS_CONFIG_TEST
+- code: MD026
+  meaning: Email Service Down
+  constant: ERROR_CODE_EMAIL_SERVICE_DOWN
+- code: MD027
+  meaning: Sms Service Down
+  constant: ERROR_CODE_SMS_SERVICE_DOWN
+- code: MD028
+  meaning: Dns Config Test
+  constant: ERROR_CODE_DNS_CONFIG_TEST
+- code: MD029
+  meaning: Credential Test
+  constant: ERROR_CODE_CREDENTIAL_TEST
+- code: MD030
+  meaning: Snmp Oid Group Test
+  constant: ERROR_CODE_SNMP_OID_GROUP_TEST
+- code: MD031
+  meaning: Internal Error
+  constant: ERROR_CODE_INTERNAL_ERROR
+- code: MD032
+  meaning: No Internet Connection
+  constant: ERROR_CODE_NO_INTERNET_CONNECTION
+- code: MD033
+  meaning: Discovery Result Save
+  constant: ERROR_CODE_DISCOVERY_RESULT_SAVE
+- code: MD034
+  meaning: Metric Plugin Test
+  constant: ERROR_CODE_METRIC_PLUGIN_TEST
+- code: MD035
+  meaning: Ldap Sync Already Running
+  constant: ERROR_CODE_LDAP_SYNC_ALREADY_RUNNING
+- code: MD036
+  meaning: Ldap Motadata Users Group Not Found
+  constant: ERROR_CODE_LDAP_OBSERVEOPS_USERS_GROUP_NOT_FOUND
+- code: MD037
+  meaning: Ldap Motadata Users Group No User Found
+  constant: ERROR_CODE_LDAP_OBSERVEOPS_USERS_GROUP_NO_USER_FOUND
+- code: MD038
+  meaning: Discovery Start
+  constant: ERROR_CODE_DISCOVERY_START
+- code: MD039
+  meaning: Object Provision Duplicate
+  constant: ERROR_CODE_OBJECT_PROVISION_DUPLICATE
+- code: MD040
+  meaning: Object Provision No Parent
+  constant: ERROR_CODE_OBJECT_PROVISION_NO_PARENT
+- code: MD041
+  meaning: Object Provision No Credential Profile
+  constant: ERROR_CODE_OBJECT_PROVISION_NO_CREDENTIAL_PROFILE
+- code: MD042
+  meaning: Object Provision No Snmp Catalog
+  constant: ERROR_CODE_OBJECT_PROVISION_NO_SNMP_CATALOG
+- code: MD043
+  meaning: Reset Password Not Authorized
+  constant: ERROR_CODE_RESET_PASSWORD_NOT_AUTHORIZED
+- code: MD044
+  meaning: Reset Password Super Admin
+  constant: ERROR_CODE_RESET_PASSWORD_SUPER_ADMIN
+- code: MD045
+  meaning: Reset Password Ldap User
+  constant: ERROR_CODE_RESET_PASSWORD_LDAP_USER
+- code: MD046
+  meaning: Password Policy Not Satisfied
+  constant: ERROR_CODE_PASSWORD_POLICY_NOT_SATISFIED
+- code: MD047
+  meaning: Connection Failed
+  constant: ERROR_CODE_CONNECTION_FAILED
+- code: MD048
+  meaning: Site Vpn Not Found
+  constant: ERROR_CODE_SITE_VPN_NOT_FOUND
+- code: MD049
+  meaning: Vendor Not Supported
+  constant: ERROR_CODE_VENDOR_NOT_SUPPORTED
+- code: MD050
+  meaning: Dhcp Lease File Not Found
+  constant: ERROR_CODE_DHCP_LEASE_FILE_NOT_FOUND
+- code: MD051
+  meaning: Dhcp Config File Not Found
+  constant: ERROR_CODE_DHCP_CONFIG_FILE_NOT_FOUND
+- code: MD052
+  meaning: Ibm Mq Invalid Channel
+  constant: ERROR_CODE_IBM_MQ_INVALID_CHANNEL
+- code: MD053
+  meaning: Ibm Mq Invalid Queue Manager
+  constant: ERROR_CODE_IBM_MQ_INVALID_QUEUE_MANAGER
+- code: MD054
+  meaning: Azure Invalid Resource Group
+  constant: ERROR_CODE_AZURE_INVALID_RESOURCE_GROUP
+- code: MD055
+  meaning: Aws Invalid Region Group
+  constant: ERROR_CODE_AWS_INVALID_REGION_GROUP
+- code: MD056
+  meaning: No Response
+  constant: ERROR_CODE_NO_RESPONSE
+- code: MD057
+  meaning: Dns Record Not Found
+  constant: ERROR_CODE_DNS_RECORD_NOT_FOUND
+- code: MD058
+  meaning: Connection Reset
+  constant: ERROR_CODE_CONNECTION_RESET
+- code: MD059
+  meaning: Command Execution Failed
+  constant: ERROR_CODE_COMMAND_EXECUTION_FAILED
+- code: MD060
+  meaning: Oid Not Found
+  constant: ERROR_CODE_OID_NOT_FOUND
+- code: MD061
+  meaning: Invalid Oid Name
+  constant: ERROR_CODE_INVALID_OID_NAME
+- code: MD062
+  meaning: Invalid Oid Index
+  constant: ERROR_CODE_INVALID_OID_INDEX
+- code: MD063
+  meaning: Invalid Oid Value
+  constant: ERROR_CODE_INVALID_OID_VALUE
+- code: MD064
+  meaning: Terminal Service Not Running
+  constant: ERROR_CODE_TERMINAL_SERVICE_NOT_RUNNING
+- code: MD065
+  meaning: Dhcp Service Not Running
+  constant: ERROR_CODE_DHCP_SERVICE_NOT_RUNNING
+- code: MD066
+  meaning: Invalid Ssl Certificate
+  constant: ERROR_CODE_INVALID_SSL_CERTIFICATE
+- code: MD067
+  meaning: Invalid Domain
+  constant: ERROR_CODE_INVALID_DOMAIN
+- code: MD068
+  meaning: Iis Service Not Running
+  constant: ERROR_CODE_IIS_SERVICE_NOT_RUNNING
+- code: MD069
+  meaning: Ad Service Not Running
+  constant: ERROR_CODE_AD_SERVICE_NOT_RUNNING
+- code: MD070
+  meaning: Ftp Service Not Running
+  constant: ERROR_CODE_FTP_SERVICE_NOT_RUNNING
+- code: MD071
+  meaning: Windows Cluster Service Not Running
+  constant: ERROR_CODE_WINDOWS_CLUSTER_SERVICE_NOT_RUNNING
+- code: MD072
+  meaning: Cloud Instance Not Found
+  constant: ERROR_CODE_CLOUD_INSTANCE_NOT_FOUND
+- code: MD073
+  meaning: Topology Plugin Test
+  constant: ERROR_CODE_TOPOLOGY_PLUGIN_TEST
+- code: MD074
+  meaning: Routing Protocol Not Found
+  constant: ERROR_CODE_ROUTING_PROTOCOL_NOT_FOUND
+- code: MD075
+  meaning: Symantec Email Gateway Not Found
+  constant: ERROR_CODE_SYMANTEC_EMAIL_GATEWAY_NOT_FOUND
+- code: MD076
+  meaning: Wireless Controller Not Found
+  constant: ERROR_CODE_WIRELESS_CONTROLLER_NOT_FOUND
+- code: MD077
+  meaning: Vrf Not Found
+  constant: ERROR_CODE_VRF_NOT_FOUND
+- code: MD078
+  meaning: Vlan Not Found
+  constant: ERROR_CODE_VLAN_NOT_FOUND
+- code: MD079
+  meaning: Multicast Not Found
+  constant: ERROR_CODE_MULTICAST_NOT_FOUND
+- code: MD080
+  meaning: Stp Not Found
+  constant: ERROR_CODE_STP_NOT_FOUND
+- code: MD081
+  meaning: Remote Vpn Not Found
+  constant: ERROR_CODE_REMOTE_VPN_NOT_FOUND
+- code: MD082
+  meaning: Ipsla Not Found
+  constant: ERROR_CODE_IPSLA_NOT_FOUND
+- code: MD083
+  meaning: Bad Response
+  constant: ERROR_CODE_BAD_RESPONSE
+- code: MD084
+  meaning: No Item Found
+  constant: ERROR_CODE_NO_ITEM_FOUND
+- code: MD085
+  meaning: Database Update
+  constant: ERROR_CODE_DATABASE_UPDATE
+- code: MD086
+  meaning: Database Save
+  constant: ERROR_CODE_DATABASE_SAVE
+- code: MD087
+  meaning: Database Delete
+  constant: ERROR_CODE_DATABASE_DELETE
+- code: MD088
+  meaning: Invalid Oid Group
+  constant: ERROR_CODE_INVALID_OID_GROUP
+- code: MD089
+  meaning: Database Fetch
+  constant: ERROR_CODE_DATABASE_FETCH
+- code: MD090
+  meaning: Login Token Compromised
+  constant: ERROR_CODE_LOGIN_TOKEN_COMPROMISED
+- code: MD091
+  meaning: Agent Down
+  constant: ERROR_CODE_AGENT_DOWN
+- code: MD092
+  meaning: Event Router Limit
+  constant: ERROR_CODE_EVENT_ROUTER_LIMIT
+- code: MD093
+  meaning: Event Router No Collector
+  constant: ERROR_CODE_EVENT_ROUTER_NO_COLLECTOR
+- code: MD094
+  meaning: Duplicate
+  constant: ERROR_CODE_DUPLICATE
+- code: MD095
+  meaning: Manual Aborted
+  constant: ERROR_CODE_MANUAL_ABORTED
+- code: MD096
+  meaning: Hyperv Cluster Service Not Running
+  constant: ERROR_CODE_HYPERV_CLUSTER_SERVICE_NOT_RUNNING
+- code: MD097
+  meaning: Dns Service Not Running
+  constant: ERROR_CODE_DNS_SERVICE_NOT_RUNNING
+- code: MD098
+  meaning: Invalid Ss Bin Path
+  constant: ERROR_CODE_INVALID_SS_BIN_PATH
+- code: MD099
+  meaning: Invalid Linux Or Unix Host
+  constant: ERROR_CODE_INVALID_LINUX_OR_UNIX_HOST
+- code: MD100
+  meaning: Ntp Service Not Running
+  constant: ERROR_CODE_NTP_SERVICE_NOT_RUNNING
+- code: MD101
+  meaning: Snmp Agent System Oid Not Found
+  constant: ERROR_CODE_SNMP_AGENT_SYSTEM_OID_NOT_FOUND
+- code: MD102
+  meaning: Snmp Context Configuration Error
+  constant: ERROR_CODE_SNMP_CONTEXT_CONFIGURATION_ERROR
+- code: MD103
+  meaning: Invalid Public Or Private Ssh Key
+  constant: ERROR_CODE_INVALID_PUBLIC_OR_PRIVATE_SSH_KEY
+- code: MD104
+  meaning: Agent Busy
+  constant: ERROR_CODE_AGENT_BUSY
+- code: MD105
+  meaning: Invalid Parsing Script
+  constant: ERROR_CODE_INVALID_PARSING_SCRIPT
+- code: MD106
+  meaning: Runbook Plugin Test
+  constant: ERROR_CODE_RUNBOOK_PLUGIN_TEST
+- code: MD107
+  meaning: Proxy Server Down
+  constant: ERROR_CODE_PROXY_SERVER_DOWN
+- code: MD108
+  meaning: Invalid User Name
+  constant: ERROR_CODE_INVALID_USER_NAME
+- code: MD109
+  meaning: Invalid Auth Password
+  constant: ERROR_CODE_INVALID_AUTH_PASSWORD
+- code: MD110
+  meaning: Failed To List Objects
+  constant: ERROR_CODE_FAILED_TO_LIST_OBJECTS
+- code: MD111
+  meaning: Traceroute
+  constant: ERROR_CODE_TRACEROUTE
+- code: MD112
+  meaning: Not Sufficient Data Points
+  constant: ERROR_CODE_NOT_SUFFICIENT_DATA_POINTS
+- code: MD113
+  meaning: No Active Metrics
+  constant: ERROR_CODE_NO_ACTIVE_METRICS
+- code: MD114
+  meaning: Agent Config Change
+  constant: ERROR_CODE_AGENT_CONFIG_CHANGE
+- code: MD115
+  meaning: Process Timeout
+  constant: ERROR_CODE_PROCESS_TIMEOUT
+- code: MD116
+  meaning: Invalid Fqdn
+  constant: ERROR_CODE_INVALID_FQDN
+- code: MD118
+  meaning: User Disabled
+  constant: ERROR_CODE_USER_DISABLED
+- code: MD119
+  meaning: User Not Found
+  constant: ERROR_CODE_USER_NOT_FOUND
+- code: MD120
+  meaning: User Email Not Set
+  constant: ERROR_CODE_USER_EMAIL_NOT_SET
+- code: MD121
+  meaning: Password Expired
+  constant: ERROR_CODE_PASSWORD_EXPIRED
+- code: MD122
+  meaning: License Limit Exceeded
+  constant: ERROR_CODE_LICENSE_LIMIT_EXCEEDED
+- code: MD123
+  meaning: Remote Event Processor Busy
+  constant: ERROR_CODE_REMOTE_EVENT_PROCESSOR_BUSY
+- code: MD126
+  meaning: Credential Not Assigned
+  constant: ERROR_CODE_CREDENTIAL_NOT_ASSIGNED
+- code: MD129
+  meaning: Config Init Session Failed
+  constant: ERROR_CODE_CONFIG_INIT_SESSION_FAILED
+- code: MD130
+  meaning: Config Enable Command Failed
+  constant: ERROR_CODE_CONFIG_ENABLE_COMMAND_FAILED
+- code: MD131
+  meaning: Config Enable User Failed
+  constant: ERROR_CODE_CONFIG_ENABLE_USER_FAILED
+- code: MD132
+  meaning: Config Enable Password Failed
+  constant: ERROR_CODE_CONFIG_ENABLE_PASSWORD_FAILED
+- code: MD133
+  meaning: Config Enable Mode Failed
+  constant: ERROR_CODE_CONFIG_ENABLE_MODE_FAILED
+- code: MD134
+  meaning: Config Enable Password Not Provided
+  constant: ERROR_CODE_CONFIG_ENABLE_PASSWORD_NOT_PROVIDED
+- code: MD135
+  meaning: Config Template Not Provided
+  constant: ERROR_CODE_CONFIG_TEMPLATE_NOT_PROVIDED
+- code: MD136
+  meaning: Config Operation Not Provided
+  constant: ERROR_CODE_CONFIG_OPERATION_NOT_PROVIDED
+- code: MD137
+  meaning: Storage Test
+  constant: ERROR_CODE_STORAGE_TEST
+- code: MD138
+  meaning: Not Compatible
+  constant: ERROR_CODE_NOT_COMPATIBLE
+- code: MD139
+  meaning: Upgrade Required
+  constant: ERROR_CODE_UPGRADE_REQUIRED
+- code: MD140
+  meaning: Config Operation Invalid Content
+  constant: ERROR_CODE_CONFIG_OPERATION_INVALID_CONTENT
+- code: MD141
+  meaning: Ssh Connection Failed
+  constant: ERROR_CODE_SSH_CONNECTION_FAILED
+- code: MD142
+  meaning: Ssh Connection Limit Exceeded
+  constant: ERROR_CODE_SSH_CONNECTION_LIMIT_EXCEEDED
+- code: MD143
+  meaning: Teams Service Down
+  constant: ERROR_CODE_TEAMS_SERVICE_DOWN
+- code: MD144
+  meaning: Mfa Not Enabled
+  constant: ERROR_CODE_MFA_NOT_ENABLED
+- code: MD144
+  meaning: Otp Expired
+  constant: ERROR_CODE_OTP_EXPIRED
+- code: MD145
+  meaning: Totp Invalid
+  constant: ERROR_CODE_TOTP_INVALID
+- code: MD146
+  meaning: Rest Api Content Type Mismatch
+  constant: ERROR_CODE_REST_API_CONTENT_TYPE_MISMATCH
+- code: MD147
+  meaning: Rest Api Required Content Missing
+  constant: ERROR_CODE_REST_API_REQUIRED_CONTENT_MISSING
+- code: MD148
+  meaning: Rest Api Forbidden Content Present
+  constant: ERROR_CODE_REST_API_FORBIDDEN_CONTENT_PRESENT
+- code: MD149
+  meaning: Telnet Not Enabled
+  constant: ERROR_CODE_TELNET_NOT_ENABLED
+- code: MD150
+  meaning: Reset Password Radius User
+  constant: ERROR_CODE_RESET_PASSWORD_RADIUS_USER
+- code: MD151
+  meaning: Password Reset Required
+  constant: ERROR_CODE_PASSWORD_RESET_REQUIRED
+- code: MD152
+  meaning: Otp Rate Limit Exceeded
+  constant: ERROR_CODE_OTP_RATE_LIMIT_EXCEEDED
+- code: MD181
+  meaning: Stale Public Key
+  constant: ERROR_CODE_STALE_PUBLIC_KEY
+code_count: 150
+range:
+  first: MD000
+  last: MD181
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

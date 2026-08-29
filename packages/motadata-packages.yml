@@ -1,0 +1,265 @@
+specification: API Commons Packages
+specificationVersion: '0.1'
+provider: Motadata
+providerId: motadata
+generated: '2026-08-29'
+method: searched
+source: >-
+  registry.npmjs.org (search + per-package metadata), repo.packagist.org, api.github.com
+  (github.com/motadata2025, github.com/pmg-motadata), probed 2026-08-29. PyPI, RubyGems,
+  crates.io and NuGet were queried for Motadata-named packages and returned nothing.
+description: >-
+  First-party client libraries, SDKs, agents and tooling published by Motadata (Mindarray
+  Systems). Motadata does not publish a REST client SDK for the ObserveOps or ServiceOps
+  APIs; what it does publish is a CLI (which is also an MCP server), Real User Monitoring
+  browser and mobile SDKs, APM custom-instrumentation helpers per language, and a design-system
+  component set. Several instrumentation libraries are distributed from GitHub only, with no
+  package-registry release — their version is read from the repository's git tag.
+registries_checked:
+  - registry: npm
+    result: hit
+  - registry: packagist
+    result: hit
+  - registry: pypi
+    result: none
+    note: motadata, motadata-apm, motadata_apm, motadata-apm-instrumentation all 404.
+  - registry: rubygems
+    result: none
+    note: motadata-apm, motadata_apm, motadata-instrumentation all report "could not be found"; the Ruby gem is GitHub-distributed.
+  - registry: nuget
+    result: none
+  - registry: crates.io
+    result: none
+  - registry: maven-central
+    result: none
+packages:
+  - name: observeops
+    registry: npm
+    url: https://www.npmjs.com/package/observeops
+    version: 2.3.1
+    published: '2026-08-22'
+    official: true
+    language: TypeScript
+    kind: cli
+    description: >-
+      Official command line interface for Motadata ObserveOps (AIOps). Built AI-agent-first:
+      every command speaks --json, exit codes are a documented contract, and `observeops mcp`
+      runs the platform as an MCP server. Bundles five Agent Skills.
+    install: npm install -g observeops
+    binaries:
+      - observeops
+      - mdcli
+    repository: https://github.com/pmg-motadata/cli
+    note: >-
+      The npm README describes it as "the official command line interface for the Motadata
+      ObserveOps (AIOps) observability platform". Its documentation links point at
+      http://172.16.12.186:3333/ — an RFC 1918 private address — so the CLI's own docs site is
+      not publicly reachable; the package README and bundled skills are the public documentation.
+  - name: '@mtdt/observeops-ds-mcp'
+    registry: npm
+    url: https://www.npmjs.com/package/@mtdt/observeops-ds-mcp
+    version: 0.4.5
+    published: '2026-08-12'
+    official: false
+    language: TypeScript
+    kind: mcp-server
+    description: >-
+      MCP server for the Motadata ObserveOps design system; serves @mtdt/observeops-ds-spec to
+      coding agents. Ships both a stdio and an HTTP binary.
+    install: npx -y @mtdt/observeops-ds-mcp
+    binaries:
+      - observeops-ds-mcp
+      - observeops-ds-mcp-http
+    note: >-
+      Marked official:false deliberately. It is Motadata-branded and scoped to the @mtdt npm org,
+      but it is published by a single personal maintainer account (niravbhatt1317), declares no
+      repository, and github.com/mtdt exposes no public repos — so first-party status could not
+      be confirmed from a Motadata-controlled surface.
+  - name: '@mtdt/observeops-ds-spec'
+    registry: npm
+    url: https://www.npmjs.com/package/@mtdt/observeops-ds-spec
+    version: 0.1.208
+    published: '2026-08-12'
+    official: false
+    kind: design-system-spec
+    description: Machine-readable spec and AI operating contract for the Motadata ObserveOps design system.
+  - name: '@mtdt/observeops-ds-elements'
+    registry: npm
+    url: https://www.npmjs.com/package/@mtdt/observeops-ds-elements
+    version: 0.1.166
+    published: '2026-08-12'
+    official: false
+    kind: web-components
+    description: ObserveOps design system as framework-agnostic Web Components (obs-*).
+  - name: '@mtdt/observeops-ds-css'
+    registry: npm
+    url: https://www.npmjs.com/package/@mtdt/observeops-ds-css
+    version: 0.1.6
+    published: '2026-08-12'
+    official: false
+    kind: design-tokens
+    description: ObserveOps design-system look package — design tokens (light + dark) plus structural CSS.
+  - name: '@motadata365/browser-rum'
+    registry: npm
+    url: https://www.npmjs.com/package/@motadata365/browser-rum
+    version: 6.21.20
+    published: '2026-03-13'
+    official: true
+    language: TypeScript
+    kind: rum-sdk
+    description: >-
+      Motadata Real User Monitoring browser SDK — collects and reports real-time front-end
+      performance and user-experience data. A fork of the Datadog browser-sdk (mirrored at
+      github.com/motadata2025/browser-sdk).
+    note: Published by the npm org account `motadata365`.
+  - name: '@motadata365/browser-rum-core'
+    registry: npm
+    url: https://www.npmjs.com/package/@motadata365/browser-rum-core
+    version: 6.21.20
+    published: '2026-03-13'
+    official: true
+    kind: rum-sdk
+    description: Motadata browser RUM core utilities.
+  - name: '@motadata365/browser-core'
+    registry: npm
+    url: https://www.npmjs.com/package/@motadata365/browser-core
+    version: 6.21.20
+    published: '2026-03-13'
+    official: true
+    kind: rum-sdk
+    description: Motadata browser core utilities.
+  - name: '@motadata365/mobile-react-native'
+    registry: npm
+    url: https://www.npmjs.com/package/@motadata365/mobile-react-native
+    version: 1.0.1
+    published: '2026-08-25'
+    official: true
+    language: TypeScript
+    kind: rum-sdk
+    description: Client-side React Native module for Motadata RUM (Android).
+    repository: https://github.com/motadata2025/md-sdk-reactnative
+  - name: '@motadata365/mobile-react-navigation'
+    registry: npm
+    url: https://www.npmjs.com/package/@motadata365/mobile-react-navigation
+    version: 1.0.0
+    published: '2026-08-25'
+    official: true
+    kind: rum-sdk
+    description: Motadata RUM integration for react-navigation (automatic View tracking).
+    repository: https://github.com/motadata2025/md-sdk-reactnative
+  - name: motadata-apm/custom-instrumentation
+    registry: packagist
+    url: https://packagist.org/packages/motadata-apm/custom-instrumentation
+    version: v1.0.0
+    published: '2026-02-20'
+    official: true
+    language: PHP
+    kind: apm-instrumentation
+    description: Motadata APM custom instrumentation helpers for OpenTelemetry spans in PHP.
+    repository: https://github.com/motadata2025/motadata-apm-custom-instrumentation-php
+  - name: motadata-apm-ruby-instrumentation
+    registry: github
+    url: https://github.com/motadata2025/motadata-apm-ruby-instrumentation
+    version: v1.0.0
+    published: '2026-04-30'
+    official: true
+    language: Ruby
+    kind: apm-instrumentation
+    description: Lightweight auto-instrumentation gem for Ruby applications for Motadata APM.
+    note: >-
+      No RubyGems release — rubygems.org has no motadata gem. version is the repository's latest
+      git tag; published is the repository's last push date, which is the closest dated signal
+      a consumer has.
+  - name: motadata-apm-custom-instrumentation-go
+    registry: github
+    url: https://github.com/motadata2025/motadata-apm-custom-instrumentation-go
+    version: v1.0.0
+    published: '2026-04-20'
+    official: true
+    language: Go
+    kind: apm-instrumentation
+    description: Custom instrumentation utility for Go applications reporting to Motadata APM.
+    note: GitHub-tag distribution; no proxy.golang.org module release located.
+  - name: motadata-apm-custom-instrumentation-python
+    registry: github
+    url: https://github.com/motadata2025/motadata-apm-custom-instrumentation-python
+    version: v1.0.0
+    published: '2026-03-26'
+    official: true
+    language: Python
+    kind: apm-instrumentation
+    description: Custom instrumentation utility for Python applications reporting to Motadata APM.
+    note: No PyPI release — pypi.org has no motadata package.
+  - name: motadata-apm-custom-instrumentation-nodejs
+    registry: github
+    url: https://github.com/motadata2025/motadata-apm-custom-instrumentation-nodejs
+    version: v1.0.0
+    published: '2026-02-25'
+    official: true
+    language: JavaScript
+    kind: apm-instrumentation
+    description: Custom instrumentation utility for Node.js applications reporting to Motadata APM.
+  - name: motadata-apm-custom-instrumentation-dotnet
+    registry: github
+    url: https://github.com/motadata2025/motadata-apm-custom-instrumentation-dotnet
+    version: v1.0.0
+    published: '2026-02-25'
+    official: true
+    language: C#
+    kind: apm-instrumentation
+    description: Custom instrumentation utility for .NET applications reporting to Motadata APM.
+    note: No NuGet package located.
+  - name: motadata-apm-custom-instrumentation-java
+    registry: github
+    url: https://github.com/motadata2025/motadata-apm-custom-instrumentation-java
+    version: v1.0.0
+    published: '2026-02-25'
+    official: true
+    language: Java
+    kind: apm-instrumentation
+    description: Custom instrumentation utility for Java applications reporting to Motadata APM.
+    note: No Maven Central artifact located.
+  - name: motadata-apm-cpp-instrumentation
+    registry: github
+    url: https://github.com/motadata2025/motadata-apm-cpp-instrumentation
+    version: v1.0.0
+    published: '2026-03-30'
+    official: true
+    language: C++
+    kind: apm-instrumentation
+  - name: md-sdk-android
+    registry: github
+    url: https://github.com/motadata2025/md-sdk-android
+    version: null
+    published: '2026-08-11'
+    official: true
+    language: Kotlin
+    kind: rum-sdk
+    license: Apache-2.0
+    description: Motadata RUM SDK for Android (Kotlin and Java compatible).
+    note: >-
+      version is null on purpose — the repository carries no git tags and no Maven Central
+      coordinate was found, so a consumer cannot tell which build they are getting either.
+      published is the last push date.
+  - name: motadata-helm-charts
+    registry: github
+    url: https://github.com/motadata2025/motadata-helm-charts
+    version: opentelemetry-target-allocator-0.126.10
+    published: '2026-08-22'
+    official: true
+    kind: deployment
+    license: Apache-2.0
+    description: Motadata Helm charts, including the OpenTelemetry collector and target allocator.
+summary:
+  total: 20
+  official: 15
+  registry_published: 11
+  github_only: 9
+  sdk_note: >-
+    None of these is a REST client SDK for the ObserveOps or ServiceOps HTTP APIs. The nearest
+    thing is the `observeops` CLI, which wraps the ObserveOps API (login, token refresh,
+    self-signed TLS, response envelope, pagination, name-to-id resolution) and is the library
+    Motadata's own agent skills tell an agent to use instead of curl.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

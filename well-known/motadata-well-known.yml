@@ -1,0 +1,125 @@
+specification: API Commons Well-Known
+specificationVersion: '0.1'
+provider: Motadata
+providerId: motadata
+generated: '2026-08-29'
+method: probed
+source: Direct HTTPS probes of /.well-known/* on every Motadata host reachable from apis.yml (2026-08-29).
+description: Probe record for RFC 8615 well-known documents on the Motadata hosts. No host serves a real
+  well-known document; support.motadata.com answers 200 for every path with a single-page-app HTML shell,
+  which is not a document. No WellKnown or SecurityTxt pointer is emitted in apis.yml because nothing
+  was actually served.
+hosts:
+- host: www.motadata.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+    file: null
+    served_document: false
+  - path: /.well-known/openid-configuration
+    status: 404
+    file: null
+    served_document: false
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+    file: null
+    served_document: false
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+    file: null
+    served_document: false
+  - path: /.well-known/api-catalog
+    status: 404
+    file: null
+    served_document: false
+  - path: /.well-known/ai-plugin.json
+    status: 404
+    file: null
+    served_document: false
+  - path: /.well-known/agent-card.json
+    status: 404
+    file: null
+    served_document: false
+  - path: /.well-known/agent.json
+    status: 404
+    file: null
+    served_document: false
+- host: docs.motadata.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+    file: null
+    served_document: false
+  - path: /.well-known/openid-configuration
+    status: 404
+    file: null
+    served_document: false
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+    file: null
+    served_document: false
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+    file: null
+    served_document: false
+  - path: /.well-known/api-catalog
+    status: 404
+    file: null
+    served_document: false
+  - path: /.well-known/ai-plugin.json
+    status: 404
+    file: null
+    served_document: false
+  - path: /.well-known/agent-card.json
+    status: 404
+    file: null
+    served_document: false
+  - path: /.well-known/agent.json
+    status: 404
+    file: null
+    served_document: false
+- host: support.motadata.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    file: null
+    served_document: false
+  - path: /.well-known/openid-configuration
+    status: 200
+    file: null
+    served_document: false
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    file: null
+    served_document: false
+  - path: /.well-known/oauth-protected-resource
+    status: 200
+    file: null
+    served_document: false
+  - path: /.well-known/api-catalog
+    status: 200
+    file: null
+    served_document: false
+  - path: /.well-known/ai-plugin.json
+    status: 200
+    file: null
+    served_document: false
+  - path: /.well-known/agent-card.json
+    status: 200
+    file: null
+    served_document: false
+  - path: /.well-known/agent.json
+    status: 200
+    file: null
+    served_document: false
+  note: 'SPA catch-all: every /.well-known/* path answers HTTP 200 with the ServiceOps Angular index.html
+    (text/html, 2377 bytes, <title>ServiceOps</title>). Not a document — recorded as a miss.'
+summary:
+  hosts_probed: 3
+  paths_probed: 24
+  documents_served: 0
+  note: Zero real documents. The 200s on support.motadata.com are the ServiceOps SPA catch-all, verified
+    by reading the body.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

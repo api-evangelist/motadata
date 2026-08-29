@@ -1,0 +1,170 @@
+specification: API Commons Conventions
+specificationVersion: '0.1'
+provider: Motadata
+providerId: motadata
+generated: '2026-08-29'
+method: searched
+source: >-
+  https://docs.motadata.com/observeops-docs/API%20Documentation/,
+  https://docs.motadata.com/serviceops-docs/integration-docs/,
+  https://docs.motadata.com/serviceops-docs/setup-and-operations/on-premises-installation/installation-guides/advanced-configurations/how-to-configure-api-rate-limit,
+  and npm observeops@2.3.1 (README, bundled agent skills, embedded resource/error/schema data).
+  Retrieved 2026-08-29.
+description: >-
+  Cross-cutting runtime semantics for the Motadata API surface. The single fact that shapes
+  everything below: both Motadata products are deployed on the customer's own infrastructure.
+  There is no shared host, no Motadata-issued key, no tenant id, and no version negotiation — the
+  contract an agent gets is the one the customer's installed build happens to expose, so the
+  server version is a first-class input, not a detail.
+apis:
+  - motadata:observeops
+  - motadata:serviceops
+auth_style:
+  observeops: 'Bearer PAT (Authorization: Bearer), a static client.id cookie, or a username/password session. Streaming requires the session, not the PAT.'
+  serviceops: 'OAuth 2.0 password grant at /api/oauth/token, or Authorization: Apikey <key> (literal prefix "Apikey").'
+  see: authentication/motadata-authentication.yml
+versioning:
+  style: path-prefix
+  observeops: /api/v1
+  serviceops: /api (documented as the "V1 API"); OAuth at /api/oauth/token
+  header_negotiation: false
+  server_version_is_the_contract: true
+  detail: >-
+    Behaviour differs between server versions on the same path — the monitor status bucket set
+    includes FAIL on 8.2.7 and does not on 10.0.0. Motadata's own agent skill tells a caller to
+    read the version from `observeops info` rather than assume it.
+field_naming:
+  style: dotted-literal-keys
+  detail: >-
+    ObserveOps field keys contain literal dots (`agent.os.name`, `object.tags`,
+    `business.hour.name`). The dot is part of the key, NOT a path into a nested object. This is
+    the single most common integration mistake against this API, and it is why Motadata ships
+    entity schemas inside its CLI for local validation.
+pagination:
+  style: search-endpoint
+  detail: >-
+    List and search are separate: `search` is a POST with a filter body rather than a GET with
+    query parameters. The official CLI handles pagination and name-to-id resolution for the
+    caller; the raw paging parameters are not published.
+  documented: partial
+filtering:
+  where: compiles to WHERE, applied before aggregation, sees raw field values
+  having: compiles to HAVING, applied after aggregation, operands are result aliases with dots replaced by underscores
+  operators: ['=', '!=', '>', '<', '>=', '<=', in, not in, contains, starts with, ends with]
+  note: >-
+    Text operators work only in the pre-aggregation filter. Repeated filters join with AND; OR
+    needs the -any form. Mixed AND/OR requires an exported widget context. Getting where/having
+    the wrong way round returns the wrong rows rather than an error.
+error_envelope:
+  format: proprietary
+  rfc9457: false
+  code_field: code
+  pattern: MD###
+  success_code: MD000
+  catalog: errors/motadata-problem-types.yml
+  quirks:
+    - Unknown API paths answer MD022 "Unauthorized access" rather than 404.
+    - Non-API paths are served by the SPA with HTTP 200 and an HTML body.
+    - The server reports one validation error per round trip and collapses all of them into MD022.
+rate_limit_signaling:
+  headers: [X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset]
+  reset_units: milliseconds
+  status_on_exhaustion: undocumented
+  see: rate-limits/motadata-rate-limits.yml
+request_id_tracing:
+  supported: unknown
+  detail: >-
+    No request-id or correlation header is documented for either product. The realtime EventBus
+    path does correlate: an inbound ui.action.* event is answered by correlated reply frames
+    against a session id, which is a correlation mechanism but not an HTTP trace header.
+idempotency:
+  supported: false
+  header: null
+  detail: >-
+    No idempotency key, no request-deduplication header, and no retry-safety statement in either
+    product's documentation or in the official CLI. The CLI instead surfaces the ambiguity
+    honestly: exit code 8 means the write timed out while still running and the outcome is
+    genuinely unknown, and its guidance is to re-read the resource before retrying rather than
+    to retry blind. That is a workaround for missing idempotency, not idempotency.
+  no_pointer_note: >-
+    No `Idempotency` pointer is emitted in apis.yml. The artifact records the absence.
+dry_run_mode:
+  supported: true
+  scope: client-side
+  detail: >-
+    `--dry-run` on every create and update validates the payload locally against the product's
+    107 embedded entity schemas and prints what would be sent, without contacting the server.
+    The MCP tools expose the same thing as a `dry_run` input. This is real and useful, but it is
+    the CLIENT rehearsing, not the server: there is no server-side dry-run or preview endpoint,
+    so a payload that passes local validation can still be rejected by the instance.
+reversibility:
+  grade: documented
+  has_write_surface: true
+  detail: >-
+    Reversal exists for state changes and does not exist for deletions. Nothing in Motadata's
+    documentation or tooling states a window for any of it.
+  reversible:
+    - operation: alert ack
+      reversal: alert unack
+      window: null
+      note: EventBus-backed; the server does not confirm the effect, so the caller cannot verify either direction landed.
+    - operation: monitor disable
+      reversal: monitor enable
+      window: null
+      note: Monitor state is a toggle (enable / disable / maintenance), so any state change is reachable again.
+    - operation: agent stop
+      reversal: agent start
+      window: null
+    - operation: alert suppress
+      reversal: alert clear / expiry of the suppression
+      window: null
+  irreversible:
+    - operation: resource delete (any of the 96 types)
+      reversal: none
+      note: >-
+        No restore, undelete, trash or recycle-bin operation exists for any resource type. The
+        verb set is list/get/create/update/delete/search/delete-all — `delete-all` in particular
+        has no counterpart.
+    - operation: discovery provision
+      reversal: none stated
+      note: >-
+        Provisioning discovered objects CREATES monitors and consumes licensed object count.
+        Motadata's own MCP tool marks it destructive and its skills insist on a dry run and a
+        human confirmation first, but no documented un-provision path exists.
+    - operation: agent reset
+      reversal: none stated
+      note: Motadata's own guidance calls it "the most disruptive agent verb. Try restart first."
+    - operation: ncm approval approve / reject
+      reversal: none
+      note: >-
+        Deliberately NOT wrapped by the official CLI, which is itself a statement about how
+        reversible Motadata considers a config-change approval to be.
+  window_stated: false
+  window_note: >-
+    No reversal window is asserted anywhere in this file because Motadata states none. An
+    invented window would be the one error here that could cost an operator a production change.
+mutation_semantics:
+  update_verb: PATCH-style partial update on ObserveOps resources; PUT on several agent routes
+  bulk: 'delete-all exists per resource type; bulk updates are a client-side loop (Motadata ships templates/bulk-update.sh for the safe pattern: build the list, inspect it, dry-run the batch, confirm, then run)'
+webhooks:
+  direction: inbound-only
+  detail: >-
+    ServiceOps webhook endpoints receive events FROM external systems (each endpoint issues a URL
+    plus an Authorization Key header or auth query param). Motadata publishes no outbound event
+    catalog, no event types and no payload schema, so no AsyncAPI or Webhooks pointer is emitted.
+  docs: https://docs.motadata.com/serviceops-docs/admin-section/automation/integrations/webhook-endpoints
+streaming:
+  transport: websocket
+  protocol: Vert.x EventBus bridge
+  inbound_addresses: 'ui.action.* only — the single inbound surface the bridge accepts'
+  output: NDJSON, one JSON object per line
+  credential: password session required (a Personal Access Token cannot open the stream)
+cross_links:
+  errors: errors/motadata-problem-types.yml
+  lifecycle: lifecycle/motadata-lifecycle.yml
+  authentication: authentication/motadata-authentication.yml
+  rate_limits: rate-limits/motadata-rate-limits.yml
+  data_model: data-model/motadata-data-model.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

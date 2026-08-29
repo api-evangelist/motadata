@@ -1,0 +1,71 @@
+specification: API Commons ChangeLog
+specificationVersion: '0.1'
+provider: Motadata
+providerId: motadata
+generated: '2026-08-29'
+method: searched
+source: >-
+  https://docs.motadata.com/serviceops-docs/release-notes/ and
+  https://docs.motadata.com/observeops-docs/motadata-release-notes/overview (probed 2026-08-29)
+description: >-
+  Motadata publishes dated per-version release notes for both products in its documentation
+  site. These are PRODUCT release notes, not API change logs — no entry in the window reviewed
+  records an API contract change, a deprecation, or a removal, and neither product publishes an
+  API versioning or deprecation policy alongside them.
+scheme: semver-ish
+channels:
+  - name: ServiceOps release notes
+    url: https://docs.motadata.com/serviceops-docs/release-notes/
+    status: 200
+    current_version: 8.7.5
+    version_count: 39
+    range: 7.0 through 8.7.5
+    note: >-
+      Versions carry up to four segments (8.7.4.01, 8.7.4.02, 8.7.4.03) for patch drops between
+      minor releases.
+  - name: ObserveOps release notes
+    url: https://docs.motadata.com/observeops-docs/motadata-release-notes/overview
+    status: 200
+    current_version: 10.0.0
+    note: >-
+      Motadata's own agent skill states supported ObserveOps server versions are 8.2.7 and later,
+      verified against 8.2.7 and 10.0.0, and warns that behavior differs between them.
+  - name: observeops CLI changelog
+    url: https://www.npmjs.com/package/observeops
+    current_version: 2.3.1
+    published: '2026-08-22'
+    note: >-
+      The CLI ships a CHANGELOG.md in its repository (github.com/pmg-motadata/cli), which has no
+      public repos, so only the npm release history is publicly readable.
+entries:
+  - version: 8.7.5
+    product: ServiceOps
+    date: '2026-07-22'
+    url: https://docs.motadata.com/serviceops-docs/release-notes/version-8.7.5
+    breaking: false
+    api_change: false
+    additions:
+      - Vulnerability Management module (scanning, CVE detection, Patch Management integration)
+      - OS Deployment Management with golden-image creation and deployment policies
+      - Native DocuSign digital signature for Service Requests, Changes, Purchase Orders and Contracts
+      - Patch Deployment dashboard; 20 additional third-party applications
+      - Extended patch OS support - Ubuntu 26.04 LTS, macOS 26, SUSE 15.6/15.7/16, Debian 13
+      - Asset discovery for SUSE Linux 15.3 and Fedora 44
+      - Key-value pairs in workflow Create Task nodes; serial number, IP and host name in hardware asset actions
+      - Microsoft Graph API authentication for email-to-ticket
+    note: No deprecations or breaking changes stated in the release note.
+  - version: 10.0.0
+    product: ObserveOps
+    url: https://www.motadata.com/observeops-docs/motadata-release-notes/release-notes-10.x/release-notes-10.0.0
+    breaking: unknown
+    note: >-
+      Major-version release. Motadata's own tooling documents behavioral differences between
+      8.2.7 and 10.0.0 (for example the monitor status bucket set - 8.2.7 has FAIL, 10.0.0 does
+      not), so there ARE observable API-affecting changes across the major, but they are not
+      published as an API change log.
+window: >-
+  Recent only. The ServiceOps index lists every version from 7.0 forward; only the current
+  release is transcribed here.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

@@ -1,0 +1,107 @@
+specification: API Commons CLI
+specificationVersion: '0.1'
+provider: Motadata
+providerId: motadata
+generated: '2026-08-29'
+method: searched
+source: >-
+  https://www.npmjs.com/package/observeops (observeops@2.3.1, published 2026-08-22) — README and
+  the five Agent Skills bundled in the package tarball. Retrieved 2026-08-29.
+description: >-
+  `observeops` is Motadata's official command line interface for the ObserveOps (AIOps)
+  observability platform, and it is the most complete public description of the ObserveOps API
+  that exists — Motadata publishes no OpenAPI, so the CLI, its bundled skills and its embedded
+  resource catalog are the contract. It is written agent-first: every command speaks `--json`,
+  exit codes are a documented contract, no command blocks on a prompt it cannot ask, and
+  `observeops mcp` turns the whole thing into an MCP server.
+api: motadata:observeops
+name: observeops
+alias: mdcli
+version: 2.3.1
+published: '2026-08-22'
+language: TypeScript
+repository: https://github.com/pmg-motadata/cli
+install:
+  - method: npm
+    command: npm install -g observeops
+    note: Installs both `observeops` and the shorter alias `mdcli`.
+documentation:
+  npm: https://www.npmjs.com/package/observeops
+  self: observeops docs   # whole command catalog as JSON, written for agents to read
+  vendor_site: http://172.16.12.186:3333/
+  vendor_site_note: >-
+    The README's documentation links point at an RFC 1918 private address, so the CLI's own docs
+    site is not publicly reachable. The npm README, the bundled skills and `observeops docs` are
+    the public documentation.
+authentication:
+  commands:
+    - auth login       # prompts for host, user, password
+    - auth login --pat # mints a long-lived token for CI
+    - auth status
+    - auth token
+  profiles: true
+  profile_note: Several instances via `profile list|show|use|remove`; `--profile <name>` per command.
+  local_storage_note: '`config` stores host, TLS mode and default profile; it never stores credentials.'
+command_groups:
+  - group: session
+    commands: [auth, info, profile, config]
+    purpose: Login, connectivity/credential/server-version health check, multi-instance profiles.
+  - group: inventory
+    commands: [monitor, credential, group, user, tag, agent]
+    purpose: Monitored objects and the supporting inventory; `monitor unhealthy` is the fast triage entry.
+  - group: alerting
+    commands: [alert, policy]
+    purpose: Firing alerts (list, ack, clear, suppress) and alerting policies across metric, event, netroute, trace and rum.
+  - group: discovery
+    commands: [discovery]
+    purpose: Device discovery — list, get, run (with --follow), abort, result, provision.
+  - group: visualization
+    commands: [dashboard, widget, report, explorer, noc-view, template]
+    purpose: Saved views, widgets and monitor templates; `widget references` says what depends on one.
+  - group: data
+    commands: [metric, log, flow, trace, rum, query, catalog]
+    purpose: Metric timeseries/aggregate over REST, and log/flow/trace/rum queries with --where and --having.
+  - group: objectives
+    commands: [slo, compliance]
+    purpose: Service level objectives and posture reporting.
+  - group: network-config
+    commands: [ncm]
+    purpose: Device config list/get/backup/diff, firmware, checksum, and change approvals (approve/reject deliberately not wrapped).
+  - group: escape-hatch
+    commands: [resource, api]
+    purpose: Any of the 96 resource types without a typed command, and any authenticated REST call.
+  - group: realtime
+    commands: [watch, 'log tail']
+    purpose: Live streams per resource (alerts, discovery, agent, config, compliance, report, runbook, system, user, flow, events, types); needs a password session, not a PAT.
+  - group: agents
+    commands: [mcp, skills, docs, completion]
+    purpose: Run as an MCP server, install the bundled agent skills, emit the command catalog as JSON, shell completion.
+output_contract:
+  stdout: data only
+  stderr: everything else
+  json_flag: '--json emits exactly one JSON document on stdout; `watch --json` emits one JSON object per line (NDJSON).'
+  error_shape: 'Under --json an error is a single object with reason, message, error.code and a `next` array of suggested commands.'
+  exit_codes:
+    0: success, including empty results
+    1: error
+    2: usage error or cancellation
+    4: authentication or permission failure
+    8: pending or timed out while still running — on a write the outcome is genuinely unknown; re-read before retrying
+key_flows:
+  - name: Connect and verify
+    steps: ['observeops auth login', 'observeops info']
+  - name: Triage what is firing
+    steps: ['observeops monitor unhealthy', 'observeops alert list --severity CRITICAL', 'observeops alert ack <id>']
+  - name: Safe configuration change
+    steps: ['observeops resource describe <type>', 'observeops resource create <type> --set k=v --dry-run', 'observeops resource create <type> --set k=v']
+  - name: Discover and provision
+    steps: ['observeops discovery run <job> --follow', 'observeops discovery provision <job> --dry-run', 'observeops discovery provision <job>']
+  - name: Run as an MCP server
+    steps: ['claude mcp add observeops -- observeops mcp']
+agent_skills:
+  bundled: 5
+  install: observeops skills install
+  see: skills/_index.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
