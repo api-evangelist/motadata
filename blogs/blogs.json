@@ -2,23 +2,21 @@
   "repo": "motadata",
   "feeds": [
     {
-      "source": "https://www.motadata.com/blog",
-      "feed_url": "https://www.motadata.com/blog",
-      "title": "",
-      "saved": 0,
-      "method": "none",
-      "nature": "vendor-blog",
-      "nature_basis": "path_blog"
-    },
-    {
       "source": "https://docs.motadata.com",
       "feed_url": "https://docs.motadata.com",
       "title": "",
       "saved": 0,
       "method": "none"
+    },
+    {
+      "source": "https://www.motadata.com/blog",
+      "feed_url": "https://www.motadata.com/blog",
+      "title": "",
+      "saved": 0,
+      "method": "none"
     }
   ],
-  "fetched": "2026-08-30T22:33:40Z",
+  "fetched": "2026-09-06T19:17:18Z",
   "post_count": 9,
   "feed_nature": "vendor-blog",
   "feed_nature_basis": "path_blog",
