@@ -1,4 +1,4 @@
-# Motadata (motadata)
+# Motadata
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,48 +64,123 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Motadata is an AIOps platform for IT infrastructure monitoring, log management, network analytics, and service desk automation.
+Motadata (Mindarray Systems) is a global IT software company running two AI-native platforms on a shared deep-learning foundation: ObserveOps, a unified observability and AIOps platform that brings metrics, logs, traces, flows and topology into one backend, and ServiceOps, an ITIL-aligned IT and enterprise service management suite covering service desk, CMDB, asset management, patch management and workflow automation. Both products are deployed in the customer's own environment, so every API host, credential and rate limit belongs to the customer rather than to Motadata. ObserveOps exposes a REST API at /api/v1 across 96 configuration resource types plus a Vert.x EventBus websocket for live streams, and ships an official agent-first CLI that doubles as an MCP server with 22 tools and five packaged Agent Skills. ServiceOps exposes a documented REST API over OAuth 2.0 or an API key across request, problem, change, release, CMDB, asset and service-catalog objects. Motadata publishes no OpenAPI for either product.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/motadata/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/motadata/refs/heads/main/apis.yml)
+**Areas:** AIOps · Monitoring · Observability · ITSM · Service Desk · Network Monitoring · Log Management · IT Operations · Application Performance Monitoring · OpenTelemetry
 
-## Scope
+## Motadata on APIs.io
 
-- **Type:** Index
+Everything profiled for Motadata is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/motadata/](https://apis.io/providers/motadata/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (2)
 
-- AIOps
-- Monitoring
+- [Motadata ObserveOps](https://apis.io/apis/motadata/observeops/) — ObserveOps (formerly Motadata AIOps) is a unified observability platform correlating metrics, logs, traces, flows and topology with anomaly detection that…
+- [Motadata ServiceOps](https://apis.io/apis/motadata/serviceops/) — ServiceOps is Motadata's AI-powered, ITIL-aligned IT and enterprise service management suite. Its REST API lets third-party systems create, read, update and…
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-03-27
-- **Modified:** 2026-03-27
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### MCP servers (1)
 
-### Motadata
+Model Context Protocol servers that expose the API to agents.
 
-Motadata is an AIOps platform for IT infrastructure monitoring, log management, network analytics, and service desk automation.
+- [observeops](https://apis.io/servers/motadata/observeops/)
 
-- **Human URL:** [https://www.motadata.com](https://www.motadata.com)
+#### Security (2)
 
-#### Tags
+Authentication, trust centre, and vulnerability disclosure.
 
-- AIOps
+- [Motadata Authentication](https://apis.io/security/motadata/motadata-authentication/)
+- [Motadata Domain Security](https://apis.io/security/motadata/motadata-domain-security/)
 
-#### Properties
+#### OAuth scopes (1)
 
-- [Documentation](https://docs.motadata.com)
+The permissions the API asks for.
 
-## Common Properties
+- [Motadata Scopes](https://apis.io/scopes/motadata/motadata-scopes/)
 
-- [GitHub Organization](https://github.com/motadata)
-- [LinkedIn](https://www.linkedin.com/company/motadata)
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Motadata Plans Pricing](https://apis.io/plans/motadata/motadata-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Motadata Rate Limits](https://apis.io/rate-limits/motadata/motadata-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Motadata Finops](https://apis.io/finops/motadata/motadata-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
 - [Website](https://www.motadata.com)
 - [Documentation](https://docs.motadata.com)
+- [Getting started](https://www.motadata.com/getting-started)
+- [Sign up](https://www.motadata.com/free-trial)
+- [Support](https://support.motadata.com/support-portal)
+- [Blog](https://www.motadata.com/blog)
+- [Terms of service](https://www.motadata.com/terms-of-service)
+- [Privacy policy](https://www.motadata.com/privacy-policy)
+- [GitHub](https://github.com/motadata)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 37.1** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 71.7 |
+| Contract quality | 0.0 |
+| Contract governance | 18.2 |
+| Operational transparency | 39.5 |
+| Developer ergonomics | 64.3 |
+| Access clarity | 34.2 |
+
+**Agent readiness 15.7** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | documented (partial credit) |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | derived (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | yes |
+| Well Known Catalog | yes |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 34.3** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/motadata/](https://apis.io/providers/motadata/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Motadata: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/motadata/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
